@@ -3,7 +3,7 @@ import streamlit as st
 import datetime
 import calendar
 from datetime import date
-#from pyxirr import xirr
+from pyxirr import xirr
 
 
 st.set_page_config(
