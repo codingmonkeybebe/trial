@@ -61,8 +61,8 @@ with col1:
                         value=2.0, step=0.05,format="$%fmn")
 
     lwt = st.slider('LWT',
-                        min_value=3000.0, max_value=60000.0,
-                        value=400.0, step=50.0,format="$%f")
+                        min_value=10000.0, max_value=65000.0,
+                        value=15000.0, step=100.0,format="$%")
     scrapPrice = st.slider('Scrap Price $/LWT',
                         min_value=300.0, max_value=600.0,
                         value=400.0, step=50.0,format="$%f")
