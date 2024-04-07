@@ -74,7 +74,7 @@ with col2:
     amounts = [-nbPrice, -100, teu*10]
 
     # feed tuples
-    p=xirr(zip(dates, amounts)) 
+    #p=xirr(zip(dates, amounts)) 
 
     st.write(f"Model starts: {ecd}")
     st.write(f"LWT is: {lwt}")
