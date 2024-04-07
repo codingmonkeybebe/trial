@@ -81,4 +81,4 @@ with col2:
     st.write(builtDate)
     st.write(f"Total Cost: {totalCost}")
     st.write(dates)
-    st.write(float("{:.1f}".format(p*100)),"%")
+    #st.write(float("{:.1f}".format(p*100)),"%")
