@@ -38,7 +38,7 @@ with col1:
     
     nbPrice = st.slider('Vessel Purchase Price',
                         min_value=10.0, max_value=200.0,
-                        value=95.0, step=0.5,format="$%f.dmn")
+                        value=95.0, step=0.5,format="$%f.mn")
     commission = st.slider('SBC Commission %',
                         min_value=0, max_value=3,
                         value=0, format="%d%%")
@@ -74,11 +74,11 @@ with col2:
     amounts = [-nbPrice, -100, teu*10]
 
     # feed tuples
-    #p=xirr(zip(dates, amounts)) 
+    p=xirr(zip(dates, amounts)) 
 
     st.write(f"Model starts: {ecd}")
     st.write(f"LWT is: {lwt}")
     st.write(builtDate)
     st.write(f"Total Cost: {totalCost}")
     st.write(dates)
-    #st.write(float("{:.1f}".format(p*100)),"%")
+    st.write(float("{:.1f}".format(p*100)),"%")
