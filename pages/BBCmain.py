@@ -18,15 +18,7 @@ st.set_page_config(
 
 st.write("Vessel Upgrade and Required Premium")
 col1, col2= st.columns(2)
-with col1:
-    ecd1 = st.date_input('Economic Closing Date',datetime.date.today())
-    res = calendar.monthrange(ecd1.year, ecd1.month)
-    ecd = date(ecd1.year,ecd1.month,res[1])
-    
-    builtDate1 = st.date_input('Delivery Date',datetime.date.today())
-    res = calendar.monthrange(builtDate1.year, builtDate1.month)
-    builtDate = date(builtDate1.year,builtDate1.month,res[1])
-      
+with col1:     
     capex = st.slider('Upgrade CapEx Cost',
                         min_value=10.0, max_value=60.0,
                         value=20.0, step=0.5,format="$%fm")
@@ -54,7 +46,5 @@ with col1:
 with col2:
     irr = npf.rate(n*12, bbc*30.5, -totalCost*(10**6), rv*(10**6))*12
     print(irr)
-    st.write(f"Model starts: {ecd}")
-    st.write(builtDate)
     st.write(f"Total Cost: ${totalCost}mn")
     st.write(float("{:.1f}".format(irr*100)),"%")
