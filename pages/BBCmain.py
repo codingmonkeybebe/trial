@@ -30,9 +30,9 @@ with col1:
                         min_value=1000, max_value=50000,
                         value=5000, step=10,format="$%d /Day")
 
-    opex = st.slider('Operating Cost',
-                        min_value=100, max_value=2000,
-                        value=500, step=1,format="$%d/Day")
+#     opex = st.slider('Operating Cost',
+#                         min_value=100, max_value=2000,
+#                         value=500, step=1,format="$%d/Day")
     rv = st.slider('Residual Value $mn',
                         min_value=0.0, max_value=40.0,
                         value=10.0, step=0.5,format="$%fm")
