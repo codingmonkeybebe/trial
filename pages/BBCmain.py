@@ -2,85 +2,59 @@ import streamlit as st
 #import pandas as pd
 import datetime
 import calendar
+import numpy_financial as npf
 from datetime import date
 from pyxirr import xirr
 
 
 st.set_page_config(
-    page_title="Vessel Valuation Made Simple",
+    page_title="Vessel Upgrade and Required Premium",
     page_icon="Seaspan",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
+    menu_items={}
 )
 
 
-st.write("Vessel Valuation Made Simple")
-col1, col2,col3,col4= st.columns(4)
+st.write("Vessel Upgrade and Required Premium")
+col1, col2= st.columns(2)
 with col1:
     ecd1 = st.date_input('Economic Closing Date',datetime.date.today())
     res = calendar.monthrange(ecd1.year, ecd1.month)
     ecd = date(ecd1.year,ecd1.month,res[1])
     
-    builtDate1 = st.date_input('Built Date',datetime.date.today())
+    builtDate1 = st.date_input('Delivery Date',datetime.date.today())
     res = calendar.monthrange(builtDate1.year, builtDate1.month)
     builtDate = date(builtDate1.year,builtDate1.month,res[1])
-    
-    teu = st.slider('Vessel TEU Capacity',
-                        min_value=1000, max_value=20000,
-                        value=9000, step=1000)
-    lwt=teu*0.3
-    
-    
-    nbPrice = st.slider('Vessel Purchase Price',
-                        min_value=10.0, max_value=200.0,
-                        value=95.0, step=0.5,format="$%fmn")
-    commission = st.slider('SBC Commission %',
-                        min_value=0, max_value=3,
-                        value=0, format="%d%%")
-    yardExtra = st.slider('Yard Extra and Upgrade',
-                        min_value=00.0, max_value=3.0,
-                        value=2.5, step=0.5,format="$%fmn")
-    pdCost = st.slider('Pre-Delivery Cost',
-                        min_value=00.0, max_value=3.0,
-                        value=1.75, step=0.05,format="$%fmn")
-    OtherCost = st.slider('Legal and other Cost',
-                        min_value=0.05, max_value=1.0,
-                        value=0.05, step=0.05,format="$%fmn")
+      
+    capex = st.slider('Upgrade CapEx Cost',
+                        min_value=10.0, max_value=40.0,
+                        value=20.0, step=0.5,format="$%fm")
+    OtherCost = st.slider('Total Other Costs',
+                        min_value=0.05, max_value=10.0,
+                        value=0.05, step=0.05,format="$%fm")
+
+    bbc = st.slider('BBC Rate / Day',
+                        min_value=1000, max_value=50000,
+                        value=5000, step=50,format="$%d /Day")
 
     opex = st.slider('Operating Cost',
-                        min_value=4000, max_value=10000,
-                        value=6000, step=50,format="$%g/Day")
+                        min_value=100, max_value=2000,
+                        value=500, step=100,format="$%d/Day")
+    rv = st.slider('Residual Value $mn',
+                        min_value=0.0, max_value=20.0,
+                        value=10.0, step=5.0,format="$%fm")
 
-    ddCost = st.slider('Dry Docking Cost',
-                        min_value=1.0, max_value=6.0,
-                        value=2.0, step=0.05,format="$%fmn")
+    n = st.slider('Repayment Years',
+                        min_value=1, max_value=20,
+                        value=10, step=1,format="%d yr")
 
-    lwt = st.slider('LWT',
-                        min_value=10000.0, max_value=65000.0,
-                        value=15000.0, step=100.0,format="%d")
-    scrapPrice = st.slider('Scrap Price $/LWT',
-                        min_value=300.0, max_value=600.0,
-                        value=400.0, step=50.0,format="$%f")
-
-    totalCost=nbPrice*(1+commission/100) \
-               +yardExtra \
-               +pdCost+OtherCost
-    
+    totalCost=capex+OtherCost
 
 with col2:
-    dates = [ecd, builtDate, date(builtDate.year, 12, 1)]
-    amounts = [-nbPrice, -100, teu*10]
-
-    # feed tuples
-    p=xirr(zip(dates, amounts)) 
-
+    irr = npf.rate(n*12, bbc*30.5, -totalCost*(10**6), rv*(10**6))*12
+    print(irr)
     st.write(f"Model starts: {ecd}")
     st.write(builtDate)
     st.write(f"Total Cost: ${totalCost}mn")
-    #st.write(dates)
-    st.write(float("{:.1f}".format(p*100)),"%")
+    st.write(float("{:.1f}".format(irr*100)),"%")
