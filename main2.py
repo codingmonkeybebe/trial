@@ -38,7 +38,7 @@ with col1:
     
     nbPrice = st.slider('Vessel Purchase Price',
                         min_value=10.0, max_value=200.0,
-                        value=95.0, step=0.5,format="$%f.mn")
+                        value=95.0, step=0.5,format="$%fmn")
     commission = st.slider('SBC Commission %',
                         min_value=0, max_value=3,
                         value=0, format="%d%%")
@@ -62,7 +62,7 @@ with col1:
 
     lwt = st.slider('LWT',
                         min_value=10000.0, max_value=65000.0,
-                        value=15000.0, step=100.0,format="$%")
+                        value=15000.0, step=100.0,format="%d")
     scrapPrice = st.slider('Scrap Price $/LWT',
                         min_value=300.0, max_value=600.0,
                         value=400.0, step=50.0,format="$%f")
@@ -80,8 +80,7 @@ with col2:
     p=xirr(zip(dates, amounts)) 
 
     st.write(f"Model starts: {ecd}")
-    st.write(f"LWT is: {lwt}")
     st.write(builtDate)
-    st.write(f"Total Cost: {totalCost}")
-    st.write(dates)
+    st.write(f"Total Cost: ${totalCost}mn")
+    #st.write(dates)
     st.write(float("{:.1f}".format(p*100)),"%")
