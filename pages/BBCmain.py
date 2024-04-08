@@ -28,7 +28,7 @@ with col1:
     builtDate = date(builtDate1.year,builtDate1.month,res[1])
       
     capex = st.slider('Upgrade CapEx Cost',
-                        min_value=10.0, max_value=40.0,
+                        min_value=10.0, max_value=60.0,
                         value=20.0, step=0.5,format="$%fm")
     OtherCost = st.slider('Total Other Costs',
                         min_value=0.05, max_value=10.0,
@@ -36,17 +36,17 @@ with col1:
 
     bbc = st.slider('BBC Rate / Day',
                         min_value=1000, max_value=50000,
-                        value=5000, step=50,format="$%d /Day")
+                        value=5000, step=10,format="$%d /Day")
 
     opex = st.slider('Operating Cost',
                         min_value=100, max_value=2000,
-                        value=500, step=100,format="$%d/Day")
+                        value=500, step=1,format="$%d/Day")
     rv = st.slider('Residual Value $mn',
                         min_value=0.0, max_value=20.0,
-                        value=10.0, step=5.0,format="$%fm")
+                        value=10.0, step=0.5,format="$%fm")
 
     n = st.slider('Repayment Years',
-                        min_value=1, max_value=20,
+                        min_value=1, max_value=40,
                         value=10, step=1,format="%d yr")
 
     totalCost=capex+OtherCost
