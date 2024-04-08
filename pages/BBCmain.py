@@ -38,7 +38,7 @@ with col1:
                         value=10.0, step=0.5,format="$%fm")
 
     n = st.slider('Repayment Years',
-                        min_value=1, max_value=40,
+                        min_value=1, max_value=25,
                         value=10, step=1,format="%d yr")
 
     totalCost=capex+OtherCost
