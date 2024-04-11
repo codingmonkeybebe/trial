@@ -57,10 +57,9 @@ with col2:
     
     columnLimit=8
     cols=st.columns(columnLimit)
-    capexR0= capexR0+deltaCpx
     with cols[1]:
         st.write("Capex\BBC")
-        capexR=capexR0-deltaCpx*2
+        capexR=capexR0-deltaCpx
         for j in range(1,deltaCpx*2+2,1):
             st.write(capexR)
             print(capexR)
@@ -71,7 +70,7 @@ with col2:
     for i in range(2,columnLimit,1):
         with cols[i]:
             st.write(bbcR)
-            capexR= capexR0-deltaCpx*2
+            capexR= capexR0-deltaCpx
             for j in range(1,deltaCpx*2+2,1):
                 irr = npf.rate(n*12, bbcR*30.5, -capexR*(10**6), rv*(10**6))*12
                 st.write(float("{:.1f}".format(irr*100)),"%")
