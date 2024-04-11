@@ -55,7 +55,7 @@ with col2:
 
     st.write("Sensitivities Tables:")
     
-    columnLimit=8
+    columnLimit=9
     cols=st.columns(columnLimit)
     with cols[0]:
         st.write("Capex\BBC")
@@ -75,5 +75,6 @@ with col2:
                 irr = npf.rate(n*12, bbcR*30.5, -capexR*(10**6), rv*(10**6))*12
                 st.write(float("{:.1f}".format(irr*100)),"%")
                 capexR= capexR+1
+        print(i)
         bbcR=bbcR+deltaBBC
 
