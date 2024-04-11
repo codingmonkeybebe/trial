@@ -57,7 +57,7 @@ with col2:
     
     columnLimit=8
     cols=st.columns(columnLimit)
-    with cols[1]:
+    with cols[0]:
         st.write("Capex\BBC")
         capexR=capexR0-deltaCpx
         for j in range(1,deltaCpx*2+2,1):
