@@ -67,7 +67,7 @@ with col2:
 
             
     bbcR=bbcR-deltaBBC*3
-    for i in range(2,columnLimit,1):
+    for i in range(1,columnLimit,1):
         with cols[i]:
             st.write(bbcR)
             capexR= capexR0-deltaCpx
