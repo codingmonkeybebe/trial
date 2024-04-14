@@ -17,13 +17,6 @@ st.set_page_config(
 
 "st.session_state object:",st.session_state
 
-# if 'irr' not in st.session_state:
-#     st.session_state['irr'] = 8
-# 
-# if 'bbc' not in st.session_state:
-#     st.session_state['bbc'] = 50
-
-
 st.write("Vessel Upgrade and Required Premium")
 col1, col2= st.columns(2)
 
@@ -51,13 +44,11 @@ with col1:
     bbc = st.slider('BBC Rate / Day',
                         1000.0,100000.0,0.0,100.0,key='bbc',format="$%f /Day",
                     on_change = findIRR)
-    #st.section_state.bbc=50000
-        
-    #irr = npf.rate(n*12, bbc0*30.5, -capex*(10**6), rv*(10**6))*12
-    #irr=round(irr*100,1)
-    irr = st.number_input('IRR Target',
+
+
+    irr = st.number_input('IRR Target %',
                         min_value=0.00, max_value=1000000.00,
-                        value=0.0, step=0.1,key='irr',format="%0.1f",
+                        value=0.0, step=0.1,key='irr',format="%0.1%",
                     on_change = findBBC)
 
 with col2:
@@ -92,3 +83,5 @@ with col2:
                 irr = npf.rate(n*12, bbcR*30.5, -capexR*(10**6), rv*(10**6))*12
                 st.write(float("{:.1f}".format(float(irr)*100)),"%")
                 capexR= capexR+1
+             
+             #
