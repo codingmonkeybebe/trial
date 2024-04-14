@@ -48,7 +48,7 @@ with col1:
 
     irr = st.number_input('IRR Target %',
                         min_value=0.00, max_value=1000000.00,
-                        value=0.0, step=0.1,key='irr',format="%0.1%",
+                        value=0.0, step=0.1,key='irr',format="%0.1f",
                     on_change = findBBC)
 
 with col2:
