@@ -60,9 +60,6 @@ with col1:
                         value=0.0, step=0.1,key='irr',format="%0.1f",
                     on_change = findBBC)
 
-
-    irr0=irr
-
 with col2:
     st.write(f"Total Cost: ${capex}mn")
     irr = npf.rate(n*12, bbc*30.5, -capex*(10**6), rv*(10**6))*12
@@ -95,5 +92,3 @@ with col2:
                 irr = npf.rate(n*12, bbcR*30.5, -capexR*(10**6), rv*(10**6))*12
                 st.write(float("{:.1f}".format(float(irr)*100)),"%")
                 capexR= capexR+1
-             
-             #
