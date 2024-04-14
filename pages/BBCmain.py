@@ -15,10 +15,10 @@ st.set_page_config(
     menu_items={}
 )
 
-"st.session_state object:",st.session_state
+#"st.session_state object:",st.session_state
 
 st.write("Vessel Upgrade and Required Premium")
-col1, col2= st.columns(2)
+col1, col2= st.columns([0.1,0.7])
 
 def findBBC():
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.capex*(10**6),st.session_state.rv*(10**6))/30.5,1)
