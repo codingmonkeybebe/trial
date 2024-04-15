@@ -56,7 +56,7 @@ with col2:
     irr = findIRR
     st.write("BBC rate ",bbc," ", float("{:.1f}".format(irr*100)),"%")
     capexR0=round(capex,1)
-    deltaCpx=3
+    deltaCpx=2
     bbcR=round(bbc,-1)
     deltaBBC=1000
 
