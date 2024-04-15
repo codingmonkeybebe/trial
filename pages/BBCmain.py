@@ -53,16 +53,16 @@ with col1:
 
 with col2:
     st.write(f"Total Cost: ${capex}mn")
-    irr = npf.rate(n*12, bbc*30.5, -capex*(10**6), rv*(10**6))*12
+    irr = findIRR
     st.write("BBC rate ",bbc," ", float("{:.1f}".format(irr*100)),"%")
     capexR0=round(capex,1)
-    deltaCpx=5
+    deltaCpx=3
     bbcR=round(bbc,-1)
     deltaBBC=1000
 
     st.write("Sensitivities Tables:")
     
-    columnLimit=9
+    columnLimit=5
     cols=st.columns(columnLimit)
     with cols[0]:
         st.write("Capex\BBC")
