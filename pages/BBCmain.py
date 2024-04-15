@@ -71,7 +71,7 @@ with col2:
             capexR=capexR+1
 
             
-    bbcR=bbcR-deltaBBC
+    bbcR=bbcR-deltaBBC*2
     for i in range(1,columnLimit,1):
         with cols[i]:
             bbcR=bbcR+deltaBBC
