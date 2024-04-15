@@ -53,8 +53,7 @@ with col1:
 
 with col2:
     st.write(f"Total Cost: ${capex}mn")
-    irr = findIRR
-    st.write("BBC rate ",bbc," ", float("{:.1f}".format(irr)),"%")
+    st.write("BBC rate ",bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
     capexR0=round(capex,1)
     deltaCpx=2
     bbcR=round(bbc,-1)
