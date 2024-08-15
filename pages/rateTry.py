@@ -119,7 +119,7 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
                     bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
-                    formatted_string = "{:.-1f}".format(bbc)
+                    formatted_string = "{:.0f}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
                     
