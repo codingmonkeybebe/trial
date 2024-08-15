@@ -93,8 +93,8 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
-                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))*12
-                    st.write(float("{:.1f}".format(float(bbc)))," pd")
+                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))/30.421
+                    st.write(float("{:.1f}".format(float(bbc))),"0.0")
                     sbcR= sbcR+1
                  
 
