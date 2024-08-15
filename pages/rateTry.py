@@ -58,7 +58,7 @@ with st.container():
 
 
         irr = st.slider('Target IRR %',
-                            min_value=5, max_value=15.0,
+                            min_value=5.0, max_value=20.00,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
         st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
