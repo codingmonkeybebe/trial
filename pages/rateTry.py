@@ -39,12 +39,13 @@ with st.container():
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = findBBC)
         
-        capex=capex+opex*n
+
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
 
 
+        
         rv = st.slider('Residual Value $mn',
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
@@ -59,6 +60,8 @@ with st.container():
                             min_value=0.00, max_value=1000000.00,
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
+
+        capex=capex+opex*n
 
     with col3:
         st.write(f"Total Cost: ${capex}mn")
