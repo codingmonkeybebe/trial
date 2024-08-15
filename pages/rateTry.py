@@ -29,8 +29,8 @@ c3, c4 = st.columns([5,5])
 def finxXX():   
     for i in range(1, 5):
         st.session_state.irr=8
-        findBBC()
-        #findIRR()  
+        #findBBC()
+        findIRR()  
     
     
 def findBBC():
