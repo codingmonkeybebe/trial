@@ -61,7 +61,7 @@ with st.container():
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
 
-        opexPV = -npf.pv(irr/100/12,n*12,opex*30.421,0)/30.5
+        opexPV = -npf.pv(irr/100/12,n*12,opex*30.421,0)/10**6
         capex=sbc+opexPV
 
     with col3:
@@ -98,6 +98,6 @@ with st.container():
                  
 
 with st.container():
-    c3.write(f"Total Cost: ${capex}mn")
-    c4.write(f"Total Cost: ${opexPV}mn")
+    c3.write(f"Total capex: ${capex}mn")
+    c4.write(f"Total opexPV: ${opexPV}mn")
 
