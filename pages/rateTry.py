@@ -103,7 +103,7 @@ with st.container():
 
         st.write("Sensitivities Tables:")
         
-        columnLimit=15
+        columnLimit=10
         cols=st.columns(columnLimit)
         with cols[0]:
             st.write("sbc\BBC")
