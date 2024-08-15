@@ -27,11 +27,11 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def findBBC():
-    pv=(st.session_state.capex+opexPV)*mm
+    pv=(st.session_state.capex+st.session_state.opexPV)*mm
     disRate=st.session_state.irr/100/12
     st.session_state.bbc=round(npf.pmt(disRate,st.session_state.n*12,-pv,st.session_state.rv*(10**6))/dm,1)
 def findIRR():
-    pv=(st.session_state.capex+opexPV)*mm
+    pv=(st.session_state.capex+st.session_state.opexPV)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -pv, st.session_state.rv*(10**6))*12,5)
 
 with st.container():
@@ -66,7 +66,7 @@ with st.container():
                             min_value=0.01, max_value=20.00,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
-        opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
+        st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
         capex=sbc+opexPV
 
     with col3:
