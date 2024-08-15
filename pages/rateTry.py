@@ -63,7 +63,7 @@ with st.container():
         st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
         
         bbc = st.slider('Daily Rate',
-                            1000.0,200000.0,0.0,100.0,key='bbc',format="$%f /Day",
+                            1000.0,200000.0,10000,100,key='bbc',format="$%f /Day",
                         on_change = findIRR)
 
 
