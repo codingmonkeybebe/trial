@@ -95,7 +95,7 @@ with st.container():
                     npvR=sbcR+opexPV
                     irr = npf.rate(n*12, bbcR*30.5, -npvR*(10**6), rv*(10**6))*12
                     st.write(float("{:.1f}".format(float(irr)*100)),"%")
-                    capexR= capexR+1
+                    sbcR= sbcR+1
                  
 
 with st.container():
