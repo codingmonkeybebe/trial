@@ -112,7 +112,6 @@ with st.container():
                 formatted_string = "{:.1f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
-                st.write("{:.1f}".format(float(irrR*100)))                
                 opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
