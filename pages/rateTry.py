@@ -1,4 +1,5 @@
 import streamlit as st
+
 #import pandas as pd
 #import datetime
 #import calendar
@@ -26,10 +27,9 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def findBBC():
-
-    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-(st.session_state.capex+opexPV)*(10**6),st.session_state.rv*(10**6))/dm,1)
+    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-(st.session_state.capex+opexPV)*mm,st.session_state.rv*(10**6))/dm,1)
 def findIRR():
-    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.capex*(10**6), st.session_state.rv*(10**6))*12,5)
+    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.capex*mm, st.session_state.rv*(10**6))*12,5)
 
 with st.container():
 
@@ -40,7 +40,7 @@ with st.container():
         
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
-                            value=500, step=1,format="$%f/Day",key='opex',on_change = findBBC)
+                            value=500, step=1,format="$%d/Day",key='opex',on_change = findIRR)
         
 
         n = st.slider('Firm Period',
@@ -96,7 +96,7 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
-                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*mm)/dm
+                    bbc = npf.pmt(irrR/12,n*12, -npvR*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
                  
