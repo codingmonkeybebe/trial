@@ -97,6 +97,7 @@ with st.container():
                  
 
 with st.container():
-    c3.write("c4")
+    c3.write(f"Total Cost: ${capex}mn")
     c4.write("c5")
+
 
