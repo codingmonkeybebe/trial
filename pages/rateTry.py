@@ -44,7 +44,7 @@ with st.container():
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = findBBC)
-        st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm        
+
 
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
@@ -57,14 +57,18 @@ with st.container():
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
 
 
+        irr = st.slider('Target IRR %',
+                            min_value=0.01, max_value=20.00,
+                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+
+        st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
+        
         bbc = st.slider('Daily Rate',
                             1000.0,200000.0,0.0,100.0,key='bbc',format="$%f /Day",
                         on_change = findIRR)
 
 
-        irr = st.slider('Target IRR %',
-                            min_value=0.01, max_value=20.00,
-                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+
 
 
         capex=sbc+st.session_state.opexPV
