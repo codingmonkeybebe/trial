@@ -61,7 +61,7 @@ with st.container():
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
 
-        capex=capex+opex*n
+        capex=capex+5#+opex*n
 
     with col3:
         st.write(f"Total Cost: ${capex}mn")
