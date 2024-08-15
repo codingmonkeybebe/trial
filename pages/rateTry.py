@@ -18,8 +18,8 @@ st.set_page_config(
 #"st.session_state object:",st.session_state
 
 st.write("Vessel Upgrade and Required Premium")
-col1, col2= st.columns([0.1,0.7])
-col3, col4= st.columns([0.1,0.7])
+col1, col2= st.columns([5,5])
+c3, c4= st.columns([5,5])
 
 def findBBC():
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.capex*(10**6),st.session_state.rv*(10**6))/30.5,1)
