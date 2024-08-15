@@ -34,7 +34,6 @@ def findIRR():
     st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
-
 with st.container():
 
     with col1:     
@@ -69,10 +68,10 @@ with st.container():
                             value=500, step=1,format="$%d/Day",key='bbc',on_change = findIRR)
 
 
-        
+        #st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
 
-        #st.rerun()
-        st.button("Check Number", on_click=findBBC)
+        st.rerun()
+        #st.button("Check Number", on_click=findBBC)
 
 
     with col3:
