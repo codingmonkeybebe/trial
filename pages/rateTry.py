@@ -18,8 +18,8 @@ st.set_page_config(
 #"st.session_state object:",st.session_state
 
 st.write("Vessel Upgrade and Required Premium")
-col1 = st.columns([20,0])
-col2 = st.columns([20,0])
+col1 = st.columns([20])
+col2 = st.columns([20])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
 
