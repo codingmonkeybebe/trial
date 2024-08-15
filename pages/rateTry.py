@@ -84,17 +84,17 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        bbcR=bbcR-deltaBBC*2
+        irrR=0.078
         for i in range(1,columnLimit,1):
             with cols[i]:
-                bbcR=bbcR+deltaBBC
-                st.write(bbcR)
+                irrR=irrR+0.1%
+                st.write(irrR)
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
-                    irr = npf.rate(n*12, bbcR*30.5, -npvR*(10**6), rv*(10**6))*12
-                    st.write(float("{:.1f}".format(float(irr)*100)),"%")
+                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))*12
+                    st.write(float("{:.1f}".format(float(bbc)))," pd")
                     sbcR= sbcR+1
                  
 
