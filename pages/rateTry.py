@@ -67,7 +67,7 @@ with st.container():
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
         st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
-        st.session_state.capex=sbc+st.session_state.opexPV
+        capex=sbc+st.session_state.opexPV
 
     with col3:
         st.write(f"Total Cost: ${round(capex,1)}mn")
