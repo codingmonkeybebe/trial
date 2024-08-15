@@ -87,10 +87,10 @@ with st.container():
 
 
     with col3:
+        #formatted_string = "{:,}".format(bbc)
+        st.write("Total Cost: ")#+formatted_string+"mn")
         formatted_string = "{:,}".format(bbc)
-        st.write("Total Cost: "+formatted_string+"mn")
-
-        st.write("BBC rate ",st.session_state.bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
+        st.write("BBC rate ",formatted_string," ", float("{:.1f}".format(st.session_state.irr)),"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
