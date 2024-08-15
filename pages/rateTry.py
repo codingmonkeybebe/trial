@@ -7,7 +7,8 @@ from datetime import date
 #from pyxirr import xirr
 
 dm=30.421#days in momth
-
+ecoLife=25
+mm=10**6
 st.set_page_config(
     page_title="Vessel Upgrade and Required Premium",
     page_icon="Seaspan",
@@ -62,7 +63,7 @@ with st.container():
                             min_value=0.01, max_value=20.00,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
-        opexPV = -npf.pv(st.session_state.irr/100/12,n*12,opex*dm,0)/10**6
+        opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
         capex=sbc+opexPV
 
     with col3:
@@ -89,13 +90,13 @@ with st.container():
         for i in range(1,columnLimit,1):
             with cols[i]:
                 irrR=irrR+0.001
-                opexPV = -npf.pv(irrR/100/12,n*12,opex*dm,0)/10**6
+                opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
                 st.write(irrR)
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
-                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))/dm
+                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
                  
