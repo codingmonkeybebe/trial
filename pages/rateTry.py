@@ -6,6 +6,7 @@ import numpy_financial as npf
 from datetime import date
 #from pyxirr import xirr
 
+dm=30.421#days in momth
 
 st.set_page_config(
     page_title="Vessel Upgrade and Required Premium",
@@ -24,9 +25,9 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def findBBC():
-    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.capex*(10**6),st.session_state.rv*(10**6))/30.5,1)
+    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.capex*(10**6),st.session_state.rv*(10**6))/dm,1)
 def findIRR():
-    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*30.5, -st.session_state.capex*(10**6), st.session_state.rv*(10**6))*12,5)
+    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.capex*(10**6), st.session_state.rv*(10**6))*12,5)
 
 with st.container():
 
@@ -61,7 +62,7 @@ with st.container():
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
 
-        opexPV = -npf.pv(irr/100/12,n*12,opex*30.421,0)/10**6
+        opexPV = -npf.pv(irr/100/12,n*12,opex*dm,0)/10**6
         capex=sbc+opexPV
 
     with col3:
@@ -93,8 +94,8 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
-                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))/30.421
-                    st.write(float("{:.1f}".format(float(bbc))),"0.0")
+                    bbc = npf.pmt(irrR/12,n*12, -npvR*(10**6), rv*(10**6))/dm
+                    st.write(float("{:.1f}".format(float(bbc))),"0,0")
                     sbcR= sbcR+1
                  
 
