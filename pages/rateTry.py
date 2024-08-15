@@ -87,7 +87,9 @@ with st.container():
 
 
     with col3:
-        st.write(f"Total Cost: ${round(sbc,1)}mn")
+        formatted_string = "{:,}".format(bbc)
+        st.write("Total Cost: "+formatted_string+"mn")
+
         st.write("BBC rate ",st.session_state.bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
