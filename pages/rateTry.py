@@ -28,10 +28,10 @@ c3, c4 = st.columns([5,5])
 
 def findBBC():
     st.session_state.pv=(st.session_state.capex+st.session_state.opexPV)*mm
-    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*(10**6))/dm,1)
+    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm,1)
 def findIRR():
     st.session_state.pv=(st.session_state.capex+st.session_state.opexPV)*mm
-    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*(10**6))*12,5)
+    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
 
 with st.container():
 
