@@ -33,6 +33,7 @@ def finxXX():
         st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
         findIRR() 
         findBBC()
+        bbc=st.session_state.bbc
     #st.session_state.irr=8
 
     #    findBBC()
