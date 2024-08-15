@@ -99,7 +99,7 @@ with st.container():
             with cols[i]:
                 irrR=irrR+0.001
                 opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
-                st.write(f"$0.1{irrR*100}%")
+                st.write(f"$0.1f{irrR*100}%")
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     npvR=sbcR#+opexPV
