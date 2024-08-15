@@ -80,7 +80,7 @@ with st.container():
         
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
-                            value=500, step=1,format="$%:,/Day",key='bbc',on_change = findIRR)
+                            value=500, step=1,format="$%/Day",key='bbc',on_change = findIRR)
 
         #st.rerun()
         st.button("Check Number", on_click=findBBC)
