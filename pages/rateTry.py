@@ -27,15 +27,17 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def finxXX():   
-    st.session_state.irr=8
-    for i in range(1, 5):
-        findBBC()
+    st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
+    findBBC()
+    #st.session_state.irr=8
+    #for i in range(1, 5):
+    #    findBBC()
         #findIRR()  
         st.session_state.irr=st.session_state.irr+1    
     
 
-    st.session_state.irr=8
-    findBBC()
+    #st.session_state.irr=8
+    #findBBC()
     
 
 def findBBC():
