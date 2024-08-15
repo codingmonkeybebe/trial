@@ -26,6 +26,9 @@ col3,col4 = st.columns([20,1])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
 
+def finxXX():
+    st.session_state.irr=8
+
 def findBBC():
     #st.session_state.irr=8
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
@@ -44,7 +47,7 @@ with st.container():
         
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
-                            value=500, step=1,format="$%d/Day",key='opex',on_change = findBBC)
+                            value=500, step=1,format="$%d/Day",key='opex',on_change = finxXX)
 
 
         n = st.slider('Firm Period',
