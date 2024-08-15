@@ -1,5 +1,5 @@
 import streamlit as st
-
+import locale
 #import pandas as pd
 #import datetime
 #import calendar
@@ -119,7 +119,7 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
                     bbc = round(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm,-1)
-                    formatted_string = '{:,d}'.format(bbc)
+                    formatted_string = "{:,}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
                     
