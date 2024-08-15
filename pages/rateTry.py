@@ -105,15 +105,15 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        irrR=7.9
+        irrR=0.079
         for i in range(1,columnLimit,1):
             with cols[i]:
-                irrR=irrR+0.1
-                formatted_string = "{:.0f}".format(irrR)
+                irrR=irrR+0.001
+                formatted_string = "{:.1f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
                 st.write("{:.1f}".format(float(irrR*100)))                
-                opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
+                opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
