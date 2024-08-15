@@ -59,7 +59,7 @@ with st.container():
 
         irr = st.slider('Target IRR %',
                             min_value=0.1, max_value=20.00,
-                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+                            value=8.0, step=0.1,format="%0.1f%",key='irr',on_change = findBBC)
 
 
         
@@ -99,10 +99,9 @@ with st.container():
             with cols[i]:
                 irrR=irrR+0.001
                 opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
-                st.write(irrR)
+                st.write(f"${irrR}%")
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    #irr=findIRR()
                     npvR=sbcR+opexPV
                     bbc = npf.pmt(irrR/12,n*12, -npvR*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
