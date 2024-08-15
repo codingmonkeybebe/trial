@@ -98,8 +98,9 @@ with st.container():
         for i in range(1,columnLimit,1):
             with cols[i]:
                 irrR=irrR+0.001
+                formatted_string = "{:.1f}".format(irrR*100)
+                st.write(formatted_string+"%")
                 opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
-                st.write(f"${:.01 irrR*100}%")
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     npvR=sbcR#+opexPV
@@ -110,6 +111,6 @@ with st.container():
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
-    c3.write("Total capex")
+    #c3.write(f"Total capex: ${round(capex,1)}mn")
     #c4.write(f"Total opexPV: ${round(st.session_state.opexPV,1)}mn")
 
