@@ -108,8 +108,8 @@ with st.container():
         irrR=7.9
         for i in range(1,columnLimit,1):
             with cols[i]:
-                irrR=irrR+0.001
-                formatted_string = "{:.1f}".format(irrR*100)
+                irrR=irrR+1
+                formatted_string = "{:.0f}".format(irrR)
                 st.write(formatted_string+"%")
                 
                 #st.write("{:.1f}".format(float(irrR*100)))                
@@ -117,7 +117,6 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
-
                     bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
