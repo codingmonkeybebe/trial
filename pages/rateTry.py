@@ -110,6 +110,6 @@ with st.container():
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
-    #c3.write(f"Total capex: ${round(capex,1)}mn")
+    c3.write("Total capex")
     #c4.write(f"Total opexPV: ${round(st.session_state.opexPV,1)}mn")
 
