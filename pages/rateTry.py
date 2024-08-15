@@ -25,7 +25,7 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def findBBC():
-    st.session_state.capex=st.session_state.sbc+st.session_state.opexPV
+
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.capex*(10**6),st.session_state.rv*(10**6))/dm,1)
 def findIRR():
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.capex*(10**6), st.session_state.rv*(10**6))*12,5)
