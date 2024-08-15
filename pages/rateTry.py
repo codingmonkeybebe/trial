@@ -18,8 +18,8 @@ st.set_page_config(
 #"st.session_state object:",st.session_state
 
 st.write("Vessel Upgrade and Required Premium")
-col1 = st.columns([20])
-col2 = st.columns([20])
+col1,col2= st.columns([20,1])
+col3,col4 = st.columns([20,1])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
 
@@ -56,7 +56,7 @@ with st.container():
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
 
-    with col2:
+    with col3:
         st.write(f"Total Cost: ${capex}mn")
         st.write("BBC rate ",bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
         capexR0=round(capex,1)
