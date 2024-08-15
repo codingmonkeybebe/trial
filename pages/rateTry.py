@@ -31,20 +31,24 @@ def findIRR():
 with st.container():
 
     with col1:     
-        capex = st.slider('Upgrade CapEx Cost',
+        capex = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=20.0, step=0.5,format="$%fm",key='capex',on_change = findBBC)
+        
+        opex = st.slider('Operating Cost',
+                            min_value=0, max_value=20000,
+                            value=500, step=1,format="$%d/Day",key='opex',on_change = findBBC)
+        
+        capex=capex+opex*n
+        n = st.slider('Firm Period',
+                            min_value=1, max_value=25,
+                            value=10, step=1,format="%d yr",key='n',on_change = findBBC)
 
-    #     opex = st.slider('Operating Cost',
-    #                         min_value=100, max_value=2000,
-    #                         value=500, step=1,format="$%d/Day")
+
         rv = st.slider('Residual Value $mn',
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
 
-        n = st.slider('Firm Period',
-                            min_value=1, max_value=25,
-                            value=10, step=1,format="%d yr",key='n',on_change = findBBC)
 
         bbc = st.slider('Daily Rate',
                             1000.0,100000.0,0.0,100.0,key='bbc',format="$%f /Day",
