@@ -33,7 +33,7 @@ def finxXX():
     #for i in range(1, 5):
     #    findBBC()
         #findIRR()  
-   #     st.session_state.irr=st.session_state.irr+1    
+        st.session_state.irr=st.session_state.irr+1    
     
 
     #st.session_state.irr=8
@@ -111,7 +111,7 @@ with st.container():
         for i in range(1,columnLimit,1):
             with cols[i]:
                 
-                formatted_string = "{:.1f}".format(irrR*100)
+                formatted_string = "{:.2f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
                 opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
@@ -119,10 +119,11 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
                     bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
-                    st.write(float("{:.1f}".format(float(bbc))),"")
+                    formatted_string = "{:.-1f}".format(bbc)
+                    st.write(formatted_string)
                     sbcR= sbcR+1
                     
-                irrR=irrR+0.001 
+                irrR=irrR+0.0025 
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
