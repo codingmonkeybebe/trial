@@ -89,7 +89,7 @@ with st.container():
             with cols[i]:
                 bbcR=bbcR+deltaBBC
                 st.write(bbcR)
-                npvR= npvR0-deltaCpx
+                sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
                     npvR=sbcR+opexPV
