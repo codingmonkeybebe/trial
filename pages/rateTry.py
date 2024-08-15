@@ -31,13 +31,13 @@ def finxXX():
     for i in range(1, 5):
         findBBC()
         #findIRR()  
-        st.session_state.irr+0.001    
+        st.session_state.irr=st.session_state.irr+1    
     
 
     st.session_state.irr=8
     findBBC()
     
-    
+
 def findBBC():
     #st.session_state.irr=8
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
