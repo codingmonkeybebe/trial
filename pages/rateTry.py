@@ -87,7 +87,7 @@ with st.container():
         irrR=0.078
         for i in range(1,columnLimit,1):
             with cols[i]:
-                irrR=irrR+0.1%
+                irrR=irrR+0.001
                 st.write(irrR)
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
