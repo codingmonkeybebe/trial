@@ -44,7 +44,7 @@ with st.container():
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = findBBC)
-        st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm        
+        st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm        
 
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
