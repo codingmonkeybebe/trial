@@ -4,7 +4,7 @@ import streamlit as st
 #import calendar
 import numpy_financial as npf
 from datetime import date
-from pyxirr import xirr
+#from pyxirr import xirr
 
 
 st.set_page_config(
@@ -31,7 +31,7 @@ def findIRR():
 with st.container():
 
     with col1:     
-        capex = st.slider('SBC $/vsl',
+        sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=20.0, step=0.5,format="$%fm",key='capex',on_change = findBBC)
         
@@ -61,7 +61,8 @@ with st.container():
                             value=8.0, step=0.1,key='irr',format="%0.1f",
                         on_change = findBBC)
 
-        capex=capex+0#+opex*n
+        opexPV = -npf.pv(irr/100/12,n*12,opex*30.421,0)/30.5
+        capex=sbc+opexPV
 
     with col3:
         st.write(f"Total Cost: ${capex}mn")
@@ -98,6 +99,5 @@ with st.container():
 
 with st.container():
     c3.write(f"Total Cost: ${capex}mn")
-    c4.write("c5")
-
+    c4.write(f"Total Cost: ${opexPV}mn")
 
