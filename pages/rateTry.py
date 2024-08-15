@@ -72,7 +72,7 @@ with st.container():
         
 
         #st.rerun()
-        #st.button("Check Number", on_click=findBBC)
+        st.button("Check Number", on_click=findBBC)
 
 
     with col3:
