@@ -69,7 +69,7 @@ with st.container():
 
         st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
 
-        st.rerun()
+        #st.rerun()
         #st.button("Check Number", on_click=findBBC)
 
 
