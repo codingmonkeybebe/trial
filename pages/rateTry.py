@@ -103,7 +103,7 @@ with st.container():
 
         st.write("Sensitivities Tables:")
         
-        columnLimit=6
+        columnLimit=15
         cols=st.columns(columnLimit)
         with cols[0]:
             st.write("sbc\BBC")
@@ -130,7 +130,7 @@ with st.container():
                     st.write(formatted_string)
                     sbcR= sbcR+1
                     
-                irrR=irrR+0.0025 
+                irrR=irrR+0.01 
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
