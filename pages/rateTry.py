@@ -58,7 +58,7 @@ with st.container():
 
 
         irr = st.slider('Target IRR %',
-                            min_value=0.1, max_value=20,
+                            min_value=0.1, max_value=20.0,
                             value=8.0, step=0.1,format="%0.1f%",key='irr',on_change = findBBC)
 
 
