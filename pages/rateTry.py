@@ -87,7 +87,7 @@ with st.container():
                             value=500, step=1,format="$%d/Day",key='bbc',on_change = findIRR)
 
         #st.rerun()
-        st.button("Check Number", on_click=findBBC)
+        st.button("Check Number", on_click=findIRR)
 
 
     with col3:
