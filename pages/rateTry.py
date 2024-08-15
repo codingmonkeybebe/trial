@@ -118,7 +118,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
-                    bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
+                    bbc = int(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm,-1)
                     formatted_string = "{:.0f}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
