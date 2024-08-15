@@ -28,8 +28,12 @@ c3, c4 = st.columns([5,5])
 
 def finxXX():
     st.session_state.irr=8
-    findBBC()
-
+    
+    for i=1 in range(1, 5):
+        findBBC()
+        findIRR()  
+    
+    
 def findBBC():
     #st.session_state.irr=8
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
