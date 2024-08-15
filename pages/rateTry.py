@@ -89,10 +89,10 @@ with st.container():
             with cols[i]:
                 bbcR=bbcR+deltaBBC
                 st.write(bbcR)
-                capexR= capexR0-deltaCpx
+                npvR= npvR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
-                    npvR=capexR+opexPV
+                    npvR=sbcR+opexPV
                     irr = npf.rate(n*12, bbcR*30.5, -npvR*(10**6), rv*(10**6))*12
                     st.write(float("{:.1f}".format(float(irr)*100)),"%")
                     capexR= capexR+1
