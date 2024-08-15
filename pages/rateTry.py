@@ -115,7 +115,7 @@ with st.container():
                 opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    npvR=sbcR#+opexPV
+                    npvR=sbcR+opexPV
                     bbc = npf.pmt(irrR/12,n*12, -npvR*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
