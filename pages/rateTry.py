@@ -74,7 +74,7 @@ with st.container():
 
         irr = st.slider('Target IRR %',
                             min_value=0.1, max_value=20.0,
-                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+                            value=8.0, step=0.05,format="%0.1f",key='irr',on_change = findBBC)
 
 
         
@@ -96,7 +96,7 @@ with st.container():
 
         st.write("Sensitivities Tables:")
         
-        columnLimit=5
+        columnLimit=6
         cols=st.columns(columnLimit)
         with cols[0]:
             st.write("sbc\BBC")
