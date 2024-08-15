@@ -67,7 +67,7 @@ with st.container():
         capex=sbc+opexPV
 
     with col3:
-        st.write(f"Total Cost: ${capex}mn")
+        st.write(f"Total Cost: ${round(capex,1)}mn")
         st.write("BBC rate ",bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
