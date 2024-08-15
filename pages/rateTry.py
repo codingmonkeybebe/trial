@@ -67,7 +67,7 @@ with st.container():
     with col3:
         st.write(f"Total Cost: ${capex}mn")
         st.write("BBC rate ",bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
-        capexR0=round(capex,1)
+        sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
         deltaBBC=1000
@@ -77,11 +77,11 @@ with st.container():
         columnLimit=5
         cols=st.columns(columnLimit)
         with cols[0]:
-            st.write("Capex\BBC")
-            capexR=capexR0-deltaCpx
+            st.write("sbc\BBC")
+            sbcR=sbcR0-deltaCpx
             for j in range(1,deltaCpx*2+2,1):
-                st.write(capexR)
-                capexR=capexR+1
+                st.write(sbcR)
+                sbcR=sbcR+1
 
                 
         bbcR=bbcR-deltaBBC*2
@@ -92,7 +92,8 @@ with st.container():
                 capexR= capexR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #irr=findIRR()
-                    irr = npf.rate(n*12, bbcR*30.5, -capexR*(10**6), rv*(10**6))*12
+                    npvR=capexR+opexPV
+                    irr = npf.rate(n*12, bbcR*30.5, -npvR*(10**6), rv*(10**6))*12
                     st.write(float("{:.1f}".format(float(irr)*100)),"%")
                     capexR= capexR+1
                  
