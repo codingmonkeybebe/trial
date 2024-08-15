@@ -90,7 +90,8 @@ with st.container():
             st.write("sbc\BBC")
             sbcR=sbcR0-deltaCpx
             for j in range(1,deltaCpx*2+2,1):
-                st.write(sbcR)
+                formatted_string = "{:.1f}".format(sbcR)
+                st.write("$"+formatted_string+"mn")
                 sbcR=sbcR+1
 
                 
@@ -100,6 +101,7 @@ with st.container():
                 irrR=irrR+0.001
                 formatted_string = "{:.1f}".format(irrR*100)
                 st.write(formatted_string+"%")
+                
                 opexPV = -npf.pv(irrR/100/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
