@@ -27,10 +27,10 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def findBBC():
-    st.session_state.pv=(st.session_state.capex+st.session_state.opexPV)*mm
+    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm,1)
 def findIRR():
-    st.session_state.pv=(st.session_state.capex+st.session_state.opexPV)*mm
+    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
 
 with st.container():
@@ -38,7 +38,7 @@ with st.container():
     with col1:     
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
-                            value=20.0, step=0.5,format="$%fm",key='capex',on_change = findBBC)
+                            value=20.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
         
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
@@ -70,10 +70,10 @@ with st.container():
         st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
 
 
-        capex=sbc+st.session_state.opexPV
+
 
     with col3:
-        st.write(f"Total Cost: ${round(capex,1)}mn")
+        st.write(f"Total Cost: ${round(sbc,1)}mn")
         st.write("BBC rate ",st.session_state.bbc," ", float("{:.1f}".format(st.session_state.irr)),"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
@@ -108,6 +108,7 @@ with st.container():
                  
 
 with st.container():
+    capex=sbc+st.session_state.opexPV
     c3.write(f"Total capex: ${round(capex,1)}mn")
     c4.write(f"Total opexPV: ${round(st.session_state.opexPV,1)}mn")
 
