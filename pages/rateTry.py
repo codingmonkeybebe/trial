@@ -116,7 +116,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
-                    st.write("{:.1f}".format(float(irrR)))
+                    st.write("{:.1f}".format(float(sbcR+opexPV)))
                     bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
