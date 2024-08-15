@@ -27,10 +27,15 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def finxXX():   
+    st.session_state.irr=8
     for i in range(1, 5):
-        st.session_state.irr=8
-        #findBBC()
-        findIRR()  
+        findBBC()
+        #findIRR()  
+        st.session_state.irr+0.001    
+    
+
+    st.session_state.irr=8
+        findBBC()
     
     
 def findBBC():
