@@ -28,7 +28,7 @@ def findIRR():
 
 with st.container():
 
-    with col0:     
+    with col1:     
         capex = st.slider('Upgrade CapEx Cost',
                             min_value=10.0, max_value=215.0,
                             value=20.0, step=0.5,format="$%fm",key='capex',on_change = findBBC)
