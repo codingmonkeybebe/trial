@@ -98,6 +98,6 @@ with st.container():
                  
 
 with st.container():
-    c3.write(f"Total capex: ${capex}mn")
-    c4.write(f"Total opexPV: ${opexPV}mn")
+    c3.write(f"Total capex: ${round(capex,1)}mn")
+    c4.write(f"Total opexPV: ${round(opexPV,1)}mn")
 
