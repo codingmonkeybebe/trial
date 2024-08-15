@@ -58,10 +58,9 @@ with st.container():
                         on_change = findIRR)
 
 
-        irr = st.number_input('Target IRR %',
-                            min_value=0.00, max_value=1000000.00,
-                            value=8.0, step=0.1,key='irr',format="%0.1f",
-                        on_change = findBBC)
+        irr = st.slider('Target IRR %',
+                            min_value=0.01, max_value=20.00,
+                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
         opexPV = -npf.pv(st.session_state.irr/100/12,n*12,opex*dm,0)/10**6
         capex=sbc+opexPV
