@@ -60,14 +60,14 @@ with st.container():
                             min_value=0.1, max_value=20.00,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
-        st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
+
         
         bbc = st.slider('Daily Rate',
-                            1000.0,200000.0,10000,100,key='bbc',format="$%f /Day",
+                            1000.0,200000.0,10000,100,format="$%f /Day",key='bbc',
                         on_change = findIRR)
 
 
-
+        st.session_state.opexPV = -npf.pv(irr/100/12,ecoLife*12,opex*dm,0)/mm
 
 
         capex=sbc+st.session_state.opexPV
