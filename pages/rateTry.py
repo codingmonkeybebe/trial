@@ -90,6 +90,7 @@ with st.container():
         for i in range(1,columnLimit,1):
             with cols[i]:
                 irrR=irrR+0.001
+                opexPV = -npf.pv(irrR/100/12,n*12,opex*dm,0)/10**6
                 st.write(irrR)
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
