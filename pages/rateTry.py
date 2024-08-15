@@ -40,7 +40,7 @@ with st.container():
         
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
-                            value=500, step=1,format="$%,.f /Day",key='opex',on_change = findBBC)
+                            value=500, step=1,format="$%,.2f /Day",key='opex',on_change = findBBC)
         
 
         n = st.slider('Firm Period',
