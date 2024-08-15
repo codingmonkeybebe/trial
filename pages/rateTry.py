@@ -55,7 +55,7 @@ with st.container():
 
 
         bbc = st.slider('Daily Rate',
-                            1000.0,100000.0,0.0,100.0,key='bbc',format="$%f /Day",
+                            1000.0,200000.0,0.0,100.0,key='bbc',format="$%f /Day",
                         on_change = findIRR)
 
 
