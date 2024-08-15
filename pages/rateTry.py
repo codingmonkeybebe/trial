@@ -105,10 +105,10 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        irrR=0.079
+        irrR=0.08
         for i in range(1,columnLimit,1):
             with cols[i]:
-                irrR=irrR+0.001
+                
                 formatted_string = "{:.1f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
@@ -119,7 +119,8 @@ with st.container():
                     bbc = npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm
                     st.write(float("{:.1f}".format(float(bbc))),"")
                     sbcR= sbcR+1
-                 
+                    
+                irrR=irrR+0.001 
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
