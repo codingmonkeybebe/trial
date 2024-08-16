@@ -28,7 +28,7 @@ st.set_page_config(
 
 
 st.write("Vessels Investment Returns and Daily Chartering Rate")
-col1,col12,col2= st.columns([10,1,20])
+col1,col12,col2= st.columns([20,1,20])
 col3,col34,col4 = st.columns([20,1,20])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
@@ -153,7 +153,7 @@ with st.container():
 with st.container():
 
 
-    with col3:
+    #with col3:
 
         fsBBC= '{:,d}'.format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
