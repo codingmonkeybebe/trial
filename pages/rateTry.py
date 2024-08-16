@@ -101,7 +101,11 @@ with st.container():
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
         
-        st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC," for ",fsN," yrs firm period")
+        st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC,
+                " for firm period ",fsN," yrs",
+                " with ",totalCapex,"m",
+                " with Opex","pd",
+                " with release rate","pd")
         
         
         sbcR0=round(sbc,1)
