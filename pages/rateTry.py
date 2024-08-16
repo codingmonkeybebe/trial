@@ -51,6 +51,8 @@ def findBBC():
     st.write(npv)
     st.write(fv)
     st.write(adj)
+    rst=npf.pmt(i,term,-npv,fv)/adj
+    st.write(rst)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
     finxXX()
