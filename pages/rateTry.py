@@ -173,13 +173,15 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
 
-                    pv=findPV(irrR*100,sbcR)*mm #sum all pv of capex and opex and dd and any other capex
-                    fv=findFV(irrR*100)*mm
-                    bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
+                    pv=findPV(irrR,sbcR)*mm #sum all pv of capex and opex and dd and any other capex
+                    fv=findFV(irrR)*mm
+                    i=irrR/100/12
+                    term=n*12
+                    bbc = roundup(npf.pmt(i,term, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
                     st.write(formatted_string,"k")
                     sbcR= sbcR+1
-            irrR=irrR+0.001
+            irrR=irrR+0.1
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
