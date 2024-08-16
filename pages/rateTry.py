@@ -40,14 +40,14 @@ def findFV(int):
     RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv*mm)/mm #the fv of residual value at end of firm period
 
-
+    i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
+    escale=(1+inflation/100)**(n)
+    opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
 
     return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
 
 def findPV():
-    i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
-    escale=(1+inflation/100)**(n)
-    opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
+
 
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
     st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
