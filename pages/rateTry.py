@@ -35,14 +35,14 @@ def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
 def finxXX():
-   irr=defaultIRR
+   #irr=defaultIRR
    #st.session_state.irr=defaultIRR
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
    #findBBC()
 
 def findBBC():
-    #finxXX()
+    finxXX()
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv #present value
