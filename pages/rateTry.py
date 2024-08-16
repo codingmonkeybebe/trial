@@ -48,6 +48,7 @@ def findBBC():
     npv=st.session_state.pv #present value
     fv=st.session_state.rv*mm #future value
     adj=(dm*utiizationFirm)
+    st.write(i*12*100)
     st.write(npv)
     st.write(fv)
     st.write(adj)
