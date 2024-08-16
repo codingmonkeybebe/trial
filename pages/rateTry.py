@@ -8,10 +8,10 @@ from datetime import date
 #from pyxirr import xirr
 
 dm=30.421#days in momth
-ecoLife=25
+ecoLife=25.0
 mm=10**6
 
-defaultIRR=8
+defaultIRR=8.0
 utiizationFirm=0.997
 inflation=2#2%
 #st.session_state.irr=defaultIRR
