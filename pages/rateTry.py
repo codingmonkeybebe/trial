@@ -40,7 +40,7 @@ def roundup(x):
 def finxXX():
 
     #for i in range(1,10):
-   st.session_state.irr=irr
+   st.session_state.irr=st.session_state.irr
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
    findBBC()
         #findIRR() 
