@@ -46,11 +46,11 @@ def findFV(int):
 
     opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
     
-    return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
-
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
     st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)
+
+    return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
 
 
 def findBBC():
