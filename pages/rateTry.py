@@ -76,7 +76,7 @@ with st.container():
         #finxXX()
         st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
-                            min_value=5, max_value=15.0,
+                            min_value=5.0, max_value=15.0,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
 
