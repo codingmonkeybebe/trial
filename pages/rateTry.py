@@ -76,7 +76,8 @@ with st.container():
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
 
-
+        finxXX()
+        st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
                             min_value=0.1, max_value=20.0,
                             value=8.0, step=0.05,format="%0.1f",key='irr',on_change = findBBC)
@@ -86,9 +87,9 @@ with st.container():
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
                             value=500, step=1,format="$%d/Day",key='bbc',on_change = findIRR)
-
+        
         #st.rerun()
-        st.button("Check Number", on_click=finxXX)
+
 
 
     with col3:
