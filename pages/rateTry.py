@@ -72,9 +72,9 @@ with st.container():
                             value=5000, step=1,format="$%d/Day",key='opex',on_change = finxXX)
         
         if opex>0:
-            utiizationFirm=1#0.997
-        else:
             utiizationFirm=0.997
+        else:
+            utiizationFirm=1#0.997
 
         
         releaseRate = st.slider('Release Rate $/Day',
