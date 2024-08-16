@@ -28,7 +28,8 @@ c3, c4 = st.columns([5,5])
 
 
 
-def change_label_style(label, font_size='12px', font_color='red', font_family='sans-serif'):
+def change_label_style(label, font_size, font_color, font_family):
+    #(label,'12px','red','sans-serif'):
     html = f"""
     <script>
         var elems = window.parent.document.querySelectorAll('p');
@@ -41,8 +42,7 @@ def change_label_style(label, font_size='12px', font_color='red', font_family='s
     st.components.v1.html(html)
 
 label = "My text here"
-st.text_input(label)
-st.write(change_label_style(label, '20px'))
+st.write(change_label_style(label, '20px','green','palatino linotype'))
 
 
 
