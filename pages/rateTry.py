@@ -19,6 +19,7 @@ inflation=2#2%
 
 
 st.set_page_config(
+    st.markdown('<span style="font-size: 24px;">Larger text</span>', unsafe_allow_html=True)
     page_title="Vessel Upgrade and Required Premium",
     page_icon="Seaspan",
     layout="wide",
