@@ -8,7 +8,7 @@ from datetime import date
 #from pyxirr import xirr
 
 dm=30.421#days in momth
-ecoLife=25.0
+#ecoLife=25.0
 mm=10**6
 
 defaultIRR=8.0
@@ -83,6 +83,11 @@ with st.container():
         rv = st.slider('End of Life Residual Value $mn',
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = finxXX)
+        
+        ecoLife = st.slider('Economic Life 25/30 yrs',
+                            min_value=25, max_value=30,
+                            value=25, step=5,format="%d yr",key='ecoLife',on_change = findBBC)
+        
         
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
