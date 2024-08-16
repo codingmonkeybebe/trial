@@ -118,7 +118,7 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        irrR=(st.session_state.irr-0.2)/100
+        irrR=(round(st.session_state.irr-0.2,1))/100
         for i in range(1,columnLimit,1):
             with cols[i]:
                 
