@@ -103,11 +103,11 @@ with st.container():
         fsTOTALCAPEX="'$'{:0.1f}".format(st.session_state.sbc+st.session_state.otherCapex)
         fsOPEX= "${:,}".format(opex)
         fsRELEASERATE= "${:,}".format(releaseRate)
-        st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC,"pd,",
-                " for firm period ",fsN," yrs,",
-                " with Capex ",fsTOTALCAPEX,"m,",
-                " with Opex ",fsOPEX,"pd,",
-                " with release rate ",fsRELEASERATE,"pd")
+        st.write("Recommendation: "+fsIRR+"%" " Daily Rate "+fsBBC,"pd,"+
+                " for firm period "+fsN+" yrs,"+
+                " with Capex "+fsTOTALCAPEX,"m,"+
+                " with Opex "+fsOPEX+"pd,"+
+                " with release rate "+fsRELEASERATE+"pd")
         
         
         sbcR0=round(sbc,1)
