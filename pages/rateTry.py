@@ -3,28 +3,7 @@ import math
 import numpy_financial as npf
 from datetime import date
 
-#Global Variables
-dm=30.421#days in momth
-mm=10**6
-defaultIRR=8.0
-utiizationRELEASE=0.96
-inflation=2#2%
 
-st.set_page_config(
-    
-    page_title="Vessel Upgrade and Required Premium",
-    page_icon="Seaspan",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={}
-)
-
-
-st.write("Vessels Investment Returns and Daily Chartering Rate")
-col1,col12,col2= st.columns([5,1,20])
-col3,col4 = st.columns([20,1])
-#col1, col2= st.columns([5,5])
-c3, c4 = st.columns([5,5])
 
 
 
@@ -93,6 +72,41 @@ def findIRR():
     fv=fv*mm #future value
     adj=12*100#from monthly to annual rate and in whole number
     st.session_state.irr= round(npf.rate(term, pmt, -npv, fv)*adj,1)
+
+
+
+
+#Global Variables
+dm=30.421#days in momth
+mm=10**6
+defaultIRR=8.0
+utiizationRELEASE=0.96
+inflation=2#2%
+
+st.set_page_config(
+    
+    page_title="Vessel Upgrade and Required Premium",
+    page_icon="Seaspan",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={}
+)
+
+
+st.write("Vessels Investment Returns and Daily Chartering Rate")
+col1,col12,col2= st.columns([5,1,20])
+col3,col4 = st.columns([20,1])
+#col1, col2= st.columns([5,5])
+c3, c4 = st.columns([5,5])
+
+
+
+
+
+
+
+
+
 
 
 with st.container():
