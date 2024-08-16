@@ -34,7 +34,7 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def roundup(x):
-    return int(math.ceil(x / 10.0)) * 10#to the nearest 10th
+    return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
 def finxXX():
     #st.session_state.irr=defaultIRR
