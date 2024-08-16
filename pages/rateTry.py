@@ -64,7 +64,7 @@ with st.container():
                             min_value=10.0, max_value=215.0,
                             value=20.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
 
-        otherCapex = st.slider('SBC $/vsl',
+        otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=1.0, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
 
