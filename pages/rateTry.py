@@ -34,14 +34,14 @@ c3, c4 = st.columns([5,5])
 def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
-def finxXX():         
+def finxXX(int):         
     #find the End of economic life value of re-lease, opex, rv
-    i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
+    i=int/100/12 #interest rate in decimal and monthly basis
     
     RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv)/mm #the fv of residual value at end of firm period
     
-    i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
+    i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
     escale=(1+inflation)**(n)
     opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
     
@@ -53,7 +53,7 @@ def finxXX():
     #findBBC()
 
 def findBBC():
-    finxXX()
+    finxXX(st.session_state.irr)
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
@@ -61,7 +61,7 @@ def findBBC():
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
-    finxXX()
+    finxXX(st.session_state.irr)
     pmt=st.session_state.bbc*dm #monthly payment
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
@@ -154,9 +154,10 @@ with st.container():
                 opexPV = -npf.pv((irrR-inflation/100)/12,n*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    npvR=sbcR+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
+                    finxXX(irrR)
+                    pv=(sbcR+otherCapex+opexPV)*mm #sum all pv of capex and opex and dd and any other capex
                     fv=st.session_state.fvEndOfFirm*mm
-                    bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, fv)/dm/utiizationFirm)
+                    bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
                     st.write(formatted_string,"k")
                     sbcR= sbcR+1
