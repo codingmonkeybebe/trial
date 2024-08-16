@@ -56,11 +56,12 @@ def findFV(int):
 
 def findBBC():
     fv=findFV(st.session_state.irr)
-    st.write(fv)
+    
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
     fv=fv*mm #future value
+    st.write(fv)
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
     return roundup(npf.pmt(i,term,-npv,fv)/adj)
