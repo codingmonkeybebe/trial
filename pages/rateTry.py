@@ -37,7 +37,7 @@ def roundup(x):
 def findFV(int):         
     #find the End of economic life value of re-lease, opex, rv
     i=int/100/12 #interest rate in decimal and monthly basis
-    
+    st.write(ecoLife-n)
     RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv)/mm #the fv of residual value at end of firm period
 
