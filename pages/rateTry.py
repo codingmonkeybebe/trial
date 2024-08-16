@@ -59,7 +59,7 @@ def findIRR():
     #bbc=st.session_state.bbc
     st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
-    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
+    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,1)
 with st.container():
     #finxXX()
     with col1:     
@@ -96,7 +96,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        fsBBC= "{:,}".format(roundup(bbc/utiizationFirm))
+        fsBBC= "{:,}".format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
         
