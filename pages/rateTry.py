@@ -139,7 +139,7 @@ with st.container():
                 for j in range(1,deltaCpx*2+2,1):
                     npvR=sbcR+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
                     bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
-                    formatted_string = "{:,}".format(bbc)
+                    formatted_string = "${:,}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
                     
