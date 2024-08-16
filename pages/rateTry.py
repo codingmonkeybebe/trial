@@ -46,7 +46,6 @@ def findBBC():
     npv=st.session_state.pv #present value
     fv=st.session_state.rv*mm #future value
     adj=(dm*utiizationFirm)
-    st.write(utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
     finxXX()
