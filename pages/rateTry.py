@@ -81,7 +81,7 @@ with st.container():
                             min_value=5000, max_value=80000,
                             value=35000, step=100,format="$%d/Day",key='releaseRate',on_change = findBBC)
         
-        rv = st.slider('Residual Value $mn',
+        rv = st.slider('End of Life Residual Value $mn',
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = finxXX)
         
