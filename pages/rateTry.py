@@ -10,7 +10,12 @@ from datetime import date
 dm=30.421#days in momth
 ecoLife=25
 mm=10**6
-st.session_state.irr=8
+defaultBBC=5000
+defaultIRR=8
+st.session_state.irr=defaultIRR
+st.session_state.bbc=defaultBBC
+
+
 st.set_page_config(
     page_title="Vessel Upgrade and Required Premium",
     page_icon="Seaspan",
@@ -79,7 +84,7 @@ with st.container():
         
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
-                            value=500, step=1,format="$%d/Day",key='bbc',on_change = findIRR)
+                            value=defaultBBC, step=1,format="$%d/Day",key='bbc',on_change = findIRR)
         
         #st.rerun()
 
@@ -108,7 +113,7 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        irrR=0.08
+        irrR=defaultIRR/100
         for i in range(1,columnLimit,1):
             with cols[i]:
                 
