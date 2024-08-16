@@ -14,10 +14,7 @@ mm=10**6
 defaultIRR=8.0
 utiizationFirm=0.997
 inflation=2#2%
-#st.session_state.irr=defaultIRR
-#st.session_state.bbc=defaultBBC
 
-#st.markdown('<span style="font-size: 24px;">Larger text</span>', unsafe_allow_html=True)
 st.set_page_config(
     
     page_title="Vessel Upgrade and Required Premium",
@@ -27,9 +24,8 @@ st.set_page_config(
     menu_items={}
 )
 
-#"st.session_state object:",st.session_state
 
-st.write("Vessel Upgrade and Required Premium")
+st.write("Vessels Investment Returns and Daily Chartering Rate")
 col1,col12,col2= st.columns([5,1,20])
 col3,col4 = st.columns([20,1])
 #col1, col2= st.columns([5,5])
@@ -39,27 +35,15 @@ def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
 def finxXX():
-
-    #for i in range(1,10):
    st.session_state.irr=st.session_state.irr
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
-   findBBC()
-        #findIRR() 
-    #    
-    #bbc=st.session_state.bbc
-
-    
+   st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
 
 def findBBC():
-    #st.session_state.irr=8
-    #st.session_state.irr=findIRR()
-    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
-    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
+    finxXX()
     st.session_state.bbc=roundup(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm/utiizationFirm)
 def findIRR():
-    #bbc=st.session_state.bbc
-    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
-    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
+    finxXX()
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,1)
 with st.container():
     #finxXX()
