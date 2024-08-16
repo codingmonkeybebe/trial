@@ -35,7 +35,8 @@ def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
 def finxXX():
-   st.session_state.irr=defaultIRR
+   irr=defaultIRR
+   #st.session_state.irr=defaultIRR
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
    #findBBC()
