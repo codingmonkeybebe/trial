@@ -51,11 +51,11 @@ def finxXX():
 def findBBC():
     #st.session_state.irr=8
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
-    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
+    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm/utiizationFirm,1)
 def findIRR():
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
-    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
+    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
 with st.container():
     #finxXX()
@@ -63,6 +63,11 @@ with st.container():
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=20.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
+
+        otherCapex = st.slider('SBC $/vsl',
+                            min_value=10.0, max_value=215.0,
+                            value=1.0, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
+
         
         opex = st.slider('Operating Cost',
                             min_value=0, max_value=20000,
@@ -128,8 +133,8 @@ with st.container():
                 opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    #npvR=sbcR+opexPV
-                    bbc = roundup(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm/utiizationFirm)
+                    npvR=sbcR+opexPV#sum all pv of capex and opex and dd and any other capex
+                    bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
                     formatted_string = "{:,}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
