@@ -73,7 +73,7 @@ with st.container():
 
         releaseRate = st.slider('Release Rate $/Day',
                             min_value=5000, max_value=80000,
-                            value=35000, step=100,format="$%d/Day",key='opex',on_change = finxXX)
+                            value=35000, step=100,format="$%d/Day",key='releaseRate',on_change = finxXX)
         
         rv = st.slider('Residual Value $mn',
                             min_value=0.0, max_value=40.0,
