@@ -93,7 +93,7 @@ with st.container():
                             min_value=0, max_value=200000,
                             value=defaultBBC, step=100,format="$%d/Day",key='bbc',on_change = findIRR)
         
-    with col3:
+    #with col3:
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
