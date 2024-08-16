@@ -110,17 +110,20 @@ with st.container():
             min_value=4.0, max_value=15.0,
             value=irrDefault, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
         
-        
+        defaultBBC=findBBC()
+        bbc = st.slider('Daily Rate',
+            min_value=0, max_value=200000,
+            value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
         
         sbc = st.slider('SBC $/vsl',
-                            min_value=10.0, max_value=215.0,
-                            value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
+            min_value=10.0, max_value=215.0,
+            value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
-                            min_value=0.0, max_value=15.0,
-                            value=otherCapexDefault, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
+            min_value=0.0, max_value=15.0,
+            value=otherCapexDefault, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
-                            min_value=0, max_value=20000,
-                            value=opexDefault, step=100,format="$%d pd",key='opex',on_change = findBBC)
+            min_value=0, max_value=20000,
+            value=opexDefault, step=100,format="$%d pd",key='opex',on_change = findBBC)
         
         if opex>0:
             utiizationFirm=utiizationFirmDefault
@@ -129,27 +132,25 @@ with st.container():
 
         
         releaseRate = st.slider('Release Rate $ pd',
-                            min_value=5000, max_value=80000,
-                            value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findBBC)
+            min_value=5000, max_value=80000,
+            value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findBBC)
         
         rv = st.slider('End of Life Residual Value $mn',
-                            min_value=0.0, max_value=100.0,
-                            value=25.0, step=1.0,format="$%fm",key='rv',on_change = findBBC)
+            min_value=0.0, max_value=100.0,
+            value=25.0, step=1.0,format="$%fm",key='rv',on_change = findBBC)
         
         ecoLife = st.slider('Remaining Economic Life 18/25/30 yrs',
-                            min_value=18, max_value=30,
-                            value=25, step=1,format="%d yr",key='ecoLife',on_change = findBBC)
+            min_value=18, max_value=30,
+            value=25, step=1,format="%d yr",key='ecoLife',on_change = findBBC)
         
         n = st.slider('Firm Period',
-                            min_value=1, max_value=ecoLife,
-                            value=10, step=1,format="%d yr",key='n',on_change = findBBC)
+            min_value=1, max_value=ecoLife,
+            value=10, step=1,format="%d yr",key='n',on_change = findBBC)
 
 
-        defaultBBC=findBBC()
         
-        bbc = st.slider('Daily Rate',
-                            min_value=0, max_value=200000,
-                            value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
+        
+
         
     with col2:
 
