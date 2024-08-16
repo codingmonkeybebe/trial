@@ -161,14 +161,15 @@ with st.container():
                 sbcR=sbcR+1
 
                 
-        irrR=(round(st.session_state.irr-0.2,1))/100
+        irrR=round(st.session_state.irr-0.2,1)
         for i in range(1,columnLimit,1):
             with cols[i]:
-                
-                formatted_string = "{:.2f}".format(irrR*100)
-                st.write(formatted_string+"%")
-                
-                opexPV = -npf.pv((irrR-inflation/100)/12,n*12,opex*dm,0)/mm
+                st.write("{:.1f}".format(irrR)+"%")
+                i=(irrR-inflation)/100/12
+                term=n*12
+                pmt=opex*dm
+                fv=0
+                opexPV = -npf.pv(i,term,pmt,fv)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
 
