@@ -114,6 +114,7 @@ with st.container():
                             value=defaultIRR, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
         defaultBBC=findBBC()
+        st.write(defaultBBC)
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
                             value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
