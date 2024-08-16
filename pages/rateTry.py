@@ -13,7 +13,7 @@ mm=10**6
 defaultBBC=5000
 defaultIRR=8
 #st.session_state.irr=defaultIRR
-st.session_state.bbc=defaultBBC
+#st.session_state.bbc=defaultBBC
 
 
 st.set_page_config(
