@@ -65,6 +65,9 @@ def findBBC():
     st.write(st.session_state.opexPV)
     st.write(st.session_state.otherCapex)
     st.write(st.session_state.pv)
+    st.write(term)
+    st.write(fv)
+    st.write(i*12*100)
     
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
