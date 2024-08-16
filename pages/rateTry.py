@@ -90,13 +90,13 @@ with st.container():
     with col1:     
         sbc = st.slider('SBC $/vsl',
             min_value=10.0, max_value=215.0,
-            value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
+            value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findSTATEbbc)
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
             min_value=0.0, max_value=15.0,
-            value=otherCapexDefault, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
+            value=otherCapexDefault, step=0.5,format="$%fm",key='otherCapex',on_change = findSTATEbbc)
         opex = st.slider('Operating Cost + DD with 2% inflation',
             min_value=0, max_value=20000,
-            value=opexDefault, step=100,format="$%d pd",key='opex',on_change = findBBC)
+            value=opexDefault, step=100,format="$%d pd",key='opex',on_change = findSTATEbbc)
         
         if opex>0:
             utiizationFirm=utiizationFirmDefault
