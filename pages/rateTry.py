@@ -55,7 +55,7 @@ def findIRR():
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
 with st.container():
-
+    finxXX()
     with col1:     
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
