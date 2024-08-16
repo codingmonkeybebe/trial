@@ -51,10 +51,7 @@ def findFV(int):
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
     st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)
-    st.write(st.session_state.sbc)
-    st.write(st.session_state.opexPV)
-    st.write(st.session_state.otherCapex)
-    #findBBC()
+
 
 def findBBC():
     fv=findFV(st.session_state.irr)
@@ -63,6 +60,11 @@ def findBBC():
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
     fv=fv*mm #future value
+
+    st.write(st.session_state.sbc)
+    st.write(st.session_state.opexPV)
+    st.write(st.session_state.otherCapex)
+
     
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
