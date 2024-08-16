@@ -70,14 +70,18 @@ with st.container():
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = finxXX)
+
+        releaseRate = st.slider('Release Rate $/Day',
+                            min_value=5000, max_value=80000,
+                            value=35000, step=100,format="$%d/Day",key='opex',on_change = finxXX)
+        
+        rv = st.slider('Residual Value $mn',
+                            min_value=0.0, max_value=40.0,
+                            value=10.0, step=0.5,format="$%fm",key='rv',on_change = finxXX)
+        
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
-        rv = st.slider('Residual Value $mn',
-                            min_value=0.0, max_value=40.0,
-                            value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
-        #finxXX()
-        #st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
                             min_value=5.0, max_value=15.0,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
