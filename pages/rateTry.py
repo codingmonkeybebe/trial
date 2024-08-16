@@ -96,7 +96,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        fsBBC= "{:,}".format(roundup(bbc))
+        fsBBC= "{:,}".format(roundup(bbc/utiizationFirm))
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
         
