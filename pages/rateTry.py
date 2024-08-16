@@ -3,6 +3,18 @@ import math
 import numpy_financial as npf
 from datetime import date
 
+#Global Variables
+irrDefault=8.0
+sbcDefault=100
+otherCapexDefault=7.5
+opexDefault=5000
+inflation=2#2%
+utiizationFirmDefault=0.997
+utiizationRELEASE=0.96
+dm=30.421#days in momth
+mm=10**6
+
+
 st.set_page_config(
     
     page_title="TC and IRR",
@@ -93,16 +105,7 @@ def findIRR():
 
 
 
-#Global Variables
-irrDefault=8.0
-sbcDefault=100
-otherCapexDefault=7.5
-opexDefault=5000
-inflation=2#2%
-utiizationFirmDefault=0.997
-utiizationRELEASE=0.96
-dm=30.421#days in momth
-mm=10**6
+
 
 
 with st.container():
