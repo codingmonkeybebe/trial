@@ -40,10 +40,11 @@ def finxXX(int):
     
     RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv)/mm #the fv of residual value at end of firm period
-    
+
+    st.write(int)
     i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
     escale=(1+inflation/100)**(n)
-    st.write(i)
+    #st.write(i)
     opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
     
     st.session_state.fvEndOfFirm =RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV
