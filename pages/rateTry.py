@@ -99,7 +99,7 @@ with st.container():
         st.write("Total Cost: ")#+formatted_string+"mn")
         fsBBC = "{:,}".format(roundup(bbc/utiizationFirm))
         fsIRR = "{:.1f}".format(st.session_state.irr)
-        st.write("BBC rate ",fsBBC," for ", fsIRR,"%")
+        st.write(fsIRR,"%" " Daily Rate ",fsBBC)
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
