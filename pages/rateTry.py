@@ -43,10 +43,20 @@ def finxXX():
 
 def findBBC():
     finxXX()
-    st.session_state.bbc=roundup(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm/utiizationFirm)
+    i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
+    term=st.session_state.n*12 #number of months
+    npv=st.session_state.pv #present value
+    fv=st.session_state.rv*mm #future value
+    adj=dm/utiizationFirm
+    st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
     finxXX()
-    st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,1)
+    pmt=st.session_state.bbc*dm #monthly payment
+    term=st.session_state.n*12 #number of months
+    npv=st.session_state.pv #present value
+    fv=st.session_state.rv*mm #future value
+    adj=12*100#from monthly to annual rate and in whole number
+    st.session_state.irr= round(npf.rate(term, pmt, -npv, fv)*adj,1)
 
 
 with st.container():
