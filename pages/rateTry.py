@@ -64,59 +64,46 @@ with st.container():
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
-
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
                             min_value=0.5, max_value=15.0,
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
-
-        
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = finxXX)
-
-
         n = st.slider('Firm Period',
                             min_value=1, max_value=25,
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
-
-
-        
         rv = st.slider('Residual Value $mn',
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
-
         #finxXX()
-        st.button("Check Number", on_click=finxXX)
+        #st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
                             min_value=5.0, max_value=15.0,
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
-
-
         defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
                             value=defaultBBC, step=100,format="$%d/Day",key='bbc',on_change = findIRR)
         
-        #st.rerun()
-
-
-
     with col3:
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
         fsBBC= "{:,}".format(roundup(bbc))
-       
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
+        
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC," for ",fsN," yrs firm period")
+        
+        
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
-
-        st.write("Sensitivities Tables:")
-        
         columnLimit=6
+        
+        st.write("Sensitivities Tables:")
+
         cols=st.columns(columnLimit)
         with cols[0]:
             st.write("sbc\BBC")
