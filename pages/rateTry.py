@@ -33,7 +33,7 @@ col3,col4 = st.columns([20,1])
 c3, c4 = st.columns([5,5])
 
 def finxXX():
-    st.session_state.irr=defaultIRR
+    #st.session_state.irr=defaultIRR
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
     findBBC()
     #findIRR() 
@@ -73,7 +73,7 @@ with st.container():
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
 
-        finxXX()
+        #finxXX()
         st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
                             min_value=0.1, max_value=20.0,
