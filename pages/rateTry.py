@@ -41,43 +41,36 @@ def findFV(int):
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv*mm)/mm #the fv of residual value at end of firm period
 
 
+
+    return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
+
+def findPV():
     i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
     escale=(1+inflation/100)**(n)
     opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
 
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
     st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
+
+    return (st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)    
     
-    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)
-
-    return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
-
-
 def findBBC():
-    fv=findFV(st.session_state.irr)
+    fv=findFV(st.session_state.irr)*mm
     
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
-    npv=st.session_state.pv*mm #present value
-    fv=fv*mm #future value
-
-    #st.write(st.session_state.sbc)
-    #st.write(st.session_state.opexPV)
-    #st.write(st.session_state.otherCapex)
-    #st.write(st.session_state.pv)
-    #st.write(term)
-    #st.write(fv)
-    #st.write(i*12*100)
-    
+    npv=findPV()*mm #present value   
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 
     return roundup(npf.pmt(i,term,-npv,fv)/adj)
+
+
 def findIRR():
     fv=findFV(st.session_state.irr)
     pmt=st.session_state.bbc*dm #monthly payment
     term=st.session_state.n*12 #number of months
-    npv=st.session_state.pv*mm #present value
+    npv=findPV()*mm #present value  
     fv=fv*mm #future value
     adj=12*100#from monthly to annual rate and in whole number
     st.session_state.irr= round(npf.rate(term, pmt, -npv, fv)*adj,1)
@@ -169,7 +162,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
 
-                    pv=(sbcR+otherCapex+opexPV)*mm #sum all pv of capex and opex and dd and any other capex
+                    pv=findPV()*mm #sum all pv of capex and opex and dd and any other capex
                     fv=findFV(irrR*100)
                     bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
