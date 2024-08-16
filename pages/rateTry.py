@@ -38,7 +38,7 @@ def finxXX():
     findBBC()
     #findIRR() 
     #    
-    #    bbc=st.session_state.bbc
+    bbc=st.session_state.bbc
 
     
 
