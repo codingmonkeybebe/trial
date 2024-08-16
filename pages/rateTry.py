@@ -105,10 +105,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        irrR=(round(st.session_state.irr-inflation,1))/100
-        opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
-        npvR=sbc+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
-        bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
+        bbc =findBBC()
         fsBBC = "{:,}".format(bbc)
         
         fsIRR = "{:.1f}".format(st.session_state.irr)
