@@ -42,7 +42,7 @@ def change_label_style(label, font_size, font_color, font_family):
     st.components.v1.html(html)
 
 label = "My text here"
-st.write(change_label_style(label, '20px','green','palatino linotype'))
+st.write(change_label_style(label, '20px','red','palatino linotype'))
 
 
 
