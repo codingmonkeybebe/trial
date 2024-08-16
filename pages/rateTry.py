@@ -105,9 +105,9 @@ with st.container():
         fsRELEASERATE= "{:,}".format(releaseRate)
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC,"pd,",
                 " for firm period ",fsN," yrs,",
-                " with Capex$ ",fsTOTALCAPEX,"m,",
-                " with Opex$ ",fsOPEX,"pd,",
-                " with release rate$ ",fsRELEASERATE,"pd")
+                " with Capex ","$",fsTOTALCAPEX,"m,",
+                " with Opex$ ","$",fsOPEX,"pd,",
+                " with release rate ","$",fsRELEASERATE,"pd")
         
         
         sbcR0=round(sbc,1)
