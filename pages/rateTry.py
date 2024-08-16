@@ -157,6 +157,7 @@ with st.container():
                     finxXX(irrR)
                     pv=(sbcR+otherCapex+opexPV)*mm #sum all pv of capex and opex and dd and any other capex
                     fv=st.session_state.fvEndOfFirm*mm
+                    st.write(fv)
                     bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
                     st.write(formatted_string,"k")
