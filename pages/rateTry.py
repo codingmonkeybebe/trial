@@ -1,16 +1,11 @@
 import streamlit as st
 import math
-#import pandas as pd
-#import datetime
-#import calendar
 import numpy_financial as npf
 from datetime import date
-#from pyxirr import xirr
 
+#Global Variables
 dm=30.421#days in momth
-#ecoLife=25.0
 mm=10**6
-
 defaultIRR=8.0
 utiizationRELEASE=0.96
 inflation=2#2%
@@ -33,7 +28,7 @@ c3, c4 = st.columns([5,5])
 
 
 
-def change_label_style(label, font_size='12px', font_color='black', font_family='sans-serif'):
+def change_label_style(label, font_size='12px', font_color='red', font_family='sans-serif'):
     html = f"""
     <script>
         var elems = window.parent.document.querySelectorAll('p');
