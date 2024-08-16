@@ -58,13 +58,16 @@ def findFV(int):
 
     return (RREndOfFirmFV + RVEndOfFirmFV + OPEXEndOfFirmFV)
 
-def findPV(int):
+def findPV(int,sbcPV):
 
 
     i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
-    st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
+    pmt=st.session_state.opex*dm
+    term=st.session_state.n*12
+    fv=0
+    st.session_state.opexPV = -npf.pv(i,term,pmt,fv)/mm  #PV of opex during the firm period
 
-    return (st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)    
+    return (sbcPV+st.session_state.opexPV+st.session_state.otherCapex)    
     
 def findBBC():
     fv=findFV(st.session_state.irr)*mm
@@ -189,7 +192,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
 
-                    pv=findPV(irrR*100)*mm #sum all pv of capex and opex and dd and any other capex
+                    pv=findPV(irrR*100,sbcR)*mm #sum all pv of capex and opex and dd and any other capex
                     fv=findFV(irrR*100)*mm
                     bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
