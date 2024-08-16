@@ -8,6 +8,8 @@ irrDefault=8.0
 sbcDefault=100
 otherCapexDefault=7.5
 opexDefault=5000
+ecoLifeDefault=25
+firmPeriodDefault=12
 inflation=2#2%
 utiizationFirmDefault=0.997
 utiizationRELEASE=0.96
@@ -113,12 +115,12 @@ with st.container():
             value=25.0, step=1.0,format="$%fm",key='rv',on_change = findSTATEbbc)
         
         ecoLife = st.slider('Remaining Economic Life 18/25/30 yrs',
-            min_value=18, max_value=30,
-            value=25, step=1,format="%d yr",key='ecoLife',on_change = findSTATEbbc)
+            min_value=5, max_value=30,
+            value=ecoLifeDefault, step=1,format="%d yr",key='ecoLife',on_change = findSTATEbbc)
         
         n = st.slider('Firm Period',
             min_value=1, max_value=ecoLife,
-            value=10, step=1,format="%d yr",key='n',on_change = findSTATEbbc)
+            value=firmPeriodDefault, step=1,format="%d yr",key='n',on_change = findSTATEbbc)
 
 
         irr = st.slider('Target IRR %',
