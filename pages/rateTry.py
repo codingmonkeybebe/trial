@@ -1,5 +1,5 @@
 import streamlit as st
-import locale
+import math
 #import pandas as pd
 #import datetime
 #import calendar
@@ -12,6 +12,7 @@ ecoLife=25
 mm=10**6
 defaultBBC=5000
 defaultIRR=8
+utiizationFirm=0.997
 #st.session_state.irr=defaultIRR
 #st.session_state.bbc=defaultBBC
 
@@ -31,6 +32,9 @@ col1,col2= st.columns([20,1])
 col3,col4 = st.columns([20,1])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
+
+def roundup(x):
+    return int(math.ceil(x / 10.0)) * 10#to the nearest 10th
 
 def finxXX():
     #st.session_state.irr=defaultIRR
@@ -93,7 +97,7 @@ with st.container():
     with col3:
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
-        formatted_string = "{:,}".format(bbc)
+        formatted_string = "{:,}".format(roundup(bbc))
         st.write("BBC rate ",formatted_string," ", float("{:.1f}".format(st.session_state.irr)),"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
@@ -124,7 +128,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
-                    bbc = roundup(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm,-2)
+                    bbc = roundup(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm/utiizationFirm)
                     formatted_string = "{:,}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
