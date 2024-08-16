@@ -38,6 +38,7 @@ def finxXX():
    st.session_state.irr=st.session_state.irr
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
+   findBBC()
 
 def findBBC():
     finxXX()
@@ -45,8 +46,10 @@ def findBBC():
 def findIRR():
     finxXX()
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,1)
+
+
 with st.container():
-    #finxXX()
+
     with col1:     
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
