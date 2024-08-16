@@ -105,7 +105,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        bbc =findBBC()
+        #bbc =findBBC()
         fsBBC = "{:,}".format(bbc)
         
         fsIRR = "{:.1f}".format(st.session_state.irr)
