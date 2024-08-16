@@ -107,23 +107,13 @@ with st.container():
         irr = st.slider('Target IRR %',
                             min_value=4.0, max_value=15.0,
                             value=defaultIRR, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
-        
-        
 
-        
-        
-        
-        
-        
-        
         defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
                             value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
         
     with col2:
-        #formatted_string = "{:,}".format(bbc)
-        st.write("Total Cost: ")#+formatted_string+"mn")
 
         fsBBC= '{:,d}'.format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
@@ -136,7 +126,6 @@ with st.container():
                 " with Capex ",fsTOTALCAPEX,"m,",
                 " with Opex ",fsOPEX+"pd,",
                 " with release rate ",fsRELEASERATE,"pd")
-        
         
         sbcR0=round(sbc,1)
         deltaCpx=2
