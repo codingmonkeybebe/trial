@@ -52,7 +52,7 @@ def findBBC():
     #st.session_state.irr=8
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
-    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm,1)
+    st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm/utiizationFirm,1)
 def findIRR():
     st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV)*mm
