@@ -113,7 +113,7 @@ with st.container():
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
-        columnLimit=10
+        columnLimit=6
         
         st.write("Sensitivities Tables:")
 
