@@ -97,12 +97,12 @@ with st.container():
     with col3:
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
-        formatted_string = "{:,}".format(roundup(bbc/utiizationFirm))
-        st.write("BBC rate ",formatted_string," ", float("{:.1f}".format(st.session_state.irr)),"%")
+        fsBBC = "{:,}".format(roundup(bbc/utiizationFirm))
+        fsIRR = "{:.1f}".format(st.session_state.irr)
+        st.write("BBC rate ",fsBBC," for ", fsIRR,"%")
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
-        deltaBBC=1000
 
         st.write("Sensitivities Tables:")
         
