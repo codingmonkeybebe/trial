@@ -12,7 +12,7 @@ ecoLife=25.0
 mm=10**6
 
 defaultIRR=8.0
-utiizationFirm=0.997
+utiizationFirm=1#0.997
 inflation=2#2%
 
 st.set_page_config(
@@ -66,7 +66,7 @@ with st.container():
                             min_value=10.0, max_value=215.0,
                             value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
-                            min_value=0.5, max_value=15.0,
+                            min_value=0.0, max_value=15.0,
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
