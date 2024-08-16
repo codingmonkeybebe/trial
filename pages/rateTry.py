@@ -43,7 +43,7 @@ def finxXX():
     
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
     escale=(1+inflation)**(n)
-    opexEndOfFirmFV=-npf.pv((i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
+    opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
     
     st.session_state.fvEndOfFirm =RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV
 
