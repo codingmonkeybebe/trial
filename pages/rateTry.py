@@ -101,7 +101,7 @@ with st.container():
                             value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findBBC)
         
         rv = st.slider('End of Life Residual Value $mn',
-                            min_value=0.0, max_value=100,
+                            min_value=0.0, max_value=100.0,
                             value=25.0, step=1.0,format="$%fm",key='rv',on_change = findBBC)
         
         ecoLife = st.slider('Remaining Economic Life 18/25/30 yrs',
