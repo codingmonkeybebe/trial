@@ -121,7 +121,7 @@ with st.container():
             sbcR=sbcR0-deltaCpx
             for j in range(1,deltaCpx*2+2,1):
                 formatted_string = "{:.1f}".format(sbcR)
-                st.write("$"+formatted_string+"mn")
+                st.write("$"+formatted_string+"m")
                 sbcR=sbcR+1
 
                 
