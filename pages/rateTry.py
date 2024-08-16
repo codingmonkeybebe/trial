@@ -69,7 +69,7 @@ with st.container():
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
-                            value=500, step=1,format="$%d/Day",key='opex',on_change = finxXX)
+                            value=5000, step=1,format="$%d/Day",key='opex',on_change = finxXX)
 
         releaseRate = st.slider('Release Rate $/Day',
                             min_value=5000, max_value=80000,
