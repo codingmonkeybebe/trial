@@ -97,7 +97,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        fsBBC= "'$'{:,}".format(bbc)
+        fsBBC= '${:,}'.format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
         fsTOTALCAPEX="'$'{:0.1f}".format(st.session_state.sbc+st.session_state.otherCapex)
