@@ -105,9 +105,8 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        #bbc =findBBC()
-        fsBBC = "{:,}".format(bbc)
-        
+        fsBBC= "{:,}".format(roundup(bbc))
+       
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC," for ",fsN," yrs firm period")
