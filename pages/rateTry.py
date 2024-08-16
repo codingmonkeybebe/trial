@@ -10,6 +10,7 @@ from datetime import date
 dm=30.421#days in momth
 ecoLife=25
 mm=10**6
+st.session_state.irr=8
 st.set_page_config(
     page_title="Vessel Upgrade and Required Premium",
     page_icon="Seaspan",
