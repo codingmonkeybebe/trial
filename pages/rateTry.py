@@ -107,7 +107,7 @@ with st.container():
                 " for firm period ",fsN," yrs",
                 " with Capex $",fsTOTALCAPEX,"m",
                 " with Opex $",fsOPEX,"pd",
-                " with release rate",fsRELEASERATE,"pd")
+                " with release rate $",fsRELEASERATE,"pd")
         
         
         sbcR0=round(sbc,1)
