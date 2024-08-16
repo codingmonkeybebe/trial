@@ -10,7 +10,7 @@ from datetime import date
 dm=30.421#days in momth
 ecoLife=25
 mm=10**6
-defaultBBC=5000
+
 defaultIRR=8
 utiizationFirm=0.997
 inflation=2#2%
@@ -92,7 +92,7 @@ with st.container():
                             value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
 
 
-        
+        defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
                             value=defaultBBC, step=100,format="$%d/Day",key='bbc',on_change = findIRR)
