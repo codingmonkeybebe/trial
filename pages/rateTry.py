@@ -105,16 +105,6 @@ mm=10**6
 with st.container():
 
     with col1:     
-        
-        irr = st.slider('Target IRR %',
-            min_value=4.0, max_value=15.0,
-            value=irrDefault, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
-        
-        
-        bbc = st.slider('Daily Rate',
-            min_value=0, max_value=200000,
-            value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
-        
         sbc = st.slider('SBC $/vsl',
             min_value=10.0, max_value=215.0,
             value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
@@ -148,9 +138,14 @@ with st.container():
             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
 
 
-        defaultBBC=findBBC()
+        irr = st.slider('Target IRR %',
+            min_value=4.0, max_value=15.0,
+            value=irrDefault, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
         
-
+        defaultBBC=findBBC()
+        bbc = st.slider('Daily Rate',
+            min_value=0, max_value=200000,
+            value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
         
     with col2:
 
