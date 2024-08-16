@@ -100,11 +100,12 @@ with st.container():
         fsBBC= "{:,}".format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
-        fsTOTALCAPEX="{:f}".format(st.session_state.sbc+st.session_state.otherCapex)
+        fsTOTALCAPEX="{:f}".format(round(st.session_state.sbc+st.session_state.otherCapex,1))
+        fsOPEX= "{:,}".format(opex)
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC,
                 " for firm period ",fsN," yrs",
                 " with $",fsTOTALCAPEX,"m",
-                " with Opex","pd",
+                " with Opex",fsOPEX,"pd",
                 " with release rate","pd")
         
         
