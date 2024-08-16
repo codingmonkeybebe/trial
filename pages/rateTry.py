@@ -74,7 +74,8 @@ with st.container():
             utiizationFirm=1#0.997
         else:
             utiizationFirm=0.997
-        end if
+
+        
         releaseRate = st.slider('Release Rate $/Day',
                             min_value=5000, max_value=80000,
                             value=35000, step=100,format="$%d/Day",key='releaseRate',on_change = findBBC)
