@@ -124,7 +124,7 @@ with st.container():
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     #npvR=sbcR+opexPV
-                    bbc = round(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm,-1)
+                    bbc = round(npf.pmt(irrR/12,n*12, -(sbcR+opexPV)*mm, rv*mm)/dm,-2)
                     formatted_string = "{:,}".format(bbc)
                     st.write(formatted_string)
                     sbcR= sbcR+1
