@@ -5,8 +5,8 @@ from datetime import date
 
 st.set_page_config(
     
-    page_title="Vessel Upgrade and Required Premium",
-    page_icon="Seaspan",
+    page_title="TC and IRR",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={}
