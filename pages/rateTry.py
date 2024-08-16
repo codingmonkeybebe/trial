@@ -66,7 +66,7 @@ with st.container():
 
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
                             min_value=0.5, max_value=15.0,
-                            value=1.0, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
+                            value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
 
         
         opex = st.slider('Operating Cost',
