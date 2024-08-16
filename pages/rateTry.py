@@ -90,7 +90,7 @@ with st.container():
         
         
         n = st.slider('Firm Period',
-                            min_value=1, max_value=25,
+                            min_value=1, max_value=ecoLife,
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
         irr = st.slider('Target IRR %',
                             min_value=4.0, max_value=15.0,
