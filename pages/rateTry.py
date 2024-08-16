@@ -110,7 +110,7 @@ with st.container():
             min_value=5000, max_value=80000,
             value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findSTATEbbc)
         
-        rv = st.slider('End of Life Residual Value $mn',
+        rv = st.slider('PO/RV $mn',
             min_value=0.0, max_value=100.0,
             value=25.0, step=1.0,format="$%fm",key='rv',on_change = findSTATEbbc)
         
