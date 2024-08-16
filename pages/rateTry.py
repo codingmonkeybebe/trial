@@ -103,7 +103,7 @@ with st.container():
     with col3:
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
-        fsBBC = "{:,}".format(roundup(bbc/utiizationFirm))
+        fsBBC = "{:,}".format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC)
         sbcR0=round(sbc,1)
