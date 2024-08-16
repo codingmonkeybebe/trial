@@ -41,7 +41,7 @@ def finxXX():
 
     for i in range(1,10):
         st.session_state.irr=irr
-        st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
+        st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
         findBBC()
         #findIRR() 
     #    
@@ -105,7 +105,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        irrR=(round(st.session_state.irr,1)-inflation)/100
+        irrR=(round(st.session_state.irr-inflation,1))/100
         opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
         npvR=sbc+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
         bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
@@ -138,7 +138,7 @@ with st.container():
                 formatted_string = "{:.2f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
-                opexPV = -npf.pv((irrR-inflation)/12,ecoLife*12,opex*dm,0)/mm
+                opexPV = -npf.pv((irrR-inflation/100)/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     npvR=sbcR+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
