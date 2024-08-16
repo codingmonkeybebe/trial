@@ -97,12 +97,12 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        fsBBC= '${:,d}'.format(bbc)
+        fsBBC= '{:,d}'.format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
         fsN="{:d}".format(st.session_state.n)
-        fsTOTALCAPEX="'$'{:0.1f}".format(st.session_state.sbc+st.session_state.otherCapex)
-        fsOPEX= "${:,}".format(opex)
-        fsRELEASERATE= "${:,}".format(releaseRate)
+        fsTOTALCAPEX="''{:0.1f}".format(st.session_state.sbc+st.session_state.otherCapex)
+        fsOPEX= "{:,}".format(opex)
+        fsRELEASERATE= "{:,}".format(releaseRate)
         st.write("Recommendation: "+fsIRR+"%" " Daily Rate "+fsBBC,"pd,"+
                 " for firm period "+fsN+" yrs,"+
                 " with Capex "+fsTOTALCAPEX,"m,"+
