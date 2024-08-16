@@ -74,7 +74,7 @@ def findBBC():
     
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
-    npv=findPV(i*100*12)*mm #present value   
+    npv=findPV(i*100*12,st.session_state.sbc)*mm #present value   
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 
