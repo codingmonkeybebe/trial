@@ -111,7 +111,7 @@ with st.container():
         fsBBC = "{:,}".format(bbc)
         
         fsIRR = "{:.1f}".format(st.session_state.irr)
-        st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC)
+        st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC," for ",n," yrs firm period")
         sbcR0=round(sbc,1)
         deltaCpx=2
         bbcR=round(bbc,-1)
