@@ -94,7 +94,7 @@ with st.container():
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
-                            value=5000, step=1,format="$%d pd",key='opex',on_change = findFV)
+                            value=5000, step=1,format="$%d pd",key='opex',on_change = findFV(defaultIRR))
         
         if opex>0:
             utiizationFirm=0.997
