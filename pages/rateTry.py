@@ -62,13 +62,13 @@ def findBBC():
     npv=st.session_state.pv*mm #present value
     fv=fv*mm #future value
 
-    st.write(st.session_state.sbc)
-    st.write(st.session_state.opexPV)
-    st.write(st.session_state.otherCapex)
-    st.write(st.session_state.pv)
-    st.write(term)
-    st.write(fv)
-    st.write(i*12*100)
+    #st.write(st.session_state.sbc)
+    #st.write(st.session_state.opexPV)
+    #st.write(st.session_state.otherCapex)
+    #st.write(st.session_state.pv)
+    #st.write(term)
+    #st.write(fv)
+    #st.write(i*12*100)
     
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
