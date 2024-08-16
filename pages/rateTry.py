@@ -84,9 +84,9 @@ with st.container():
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = finxXX)
         
-        ecoLife = st.slider('Economic Life 25/30 yrs',
-                            min_value=25, max_value=30,
-                            value=25, step=5,format="%d yr",key='ecoLife',on_change = findBBC)
+        ecoLife = st.slider('Economic Life 18/25/30 yrs',
+                            min_value=18, max_value=30,
+                            value=25, step=1,format="%d yr",key='ecoLife',on_change = findBBC)
         
         
         n = st.slider('Firm Period',
