@@ -29,7 +29,7 @@ st.set_page_config(
 
 st.write("Vessels Investment Returns and Daily Chartering Rate")
 col1,col12,col2= st.columns([10,1,20])
-col3,col4 = st.columns([20,1])
+col3,col34,col4 = st.columns([20,1,20])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
 
@@ -114,6 +114,10 @@ with st.container():
             min_value=0.0, max_value=100.0,
             value=25.0, step=1.0,format="$%fm",key='rv',on_change = findSTATEbbc)
         
+
+        
+    with col2:
+
         ecoLife = st.slider('Remaining Economic Life 18/25/30 yrs',
             min_value=5, max_value=30,
             value=ecoLifeDefault, step=1,format="%d yr",key='ecoLife',on_change = findSTATEbbc)
@@ -131,8 +135,25 @@ with st.container():
         bbc = st.slider('Daily Rate',
             min_value=0, max_value=200000,
             value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
+
+
+
+
+
+
+
+
+
+
+
+
         
-    with col2:
+
+
+with st.container():
+
+
+    with col3:
 
         fsBBC= '{:,d}'.format(bbc)
         fsIRR = "{:.1f}".format(st.session_state.irr)
@@ -184,9 +205,3 @@ with st.container():
                     st.write(formatted_string,"k")
                     sbcR= sbcR+1
             irrR=irrR+0.1
-
-with st.container():
-    #capex=sbc+st.session_state.opexPV
-    c3.write("Total capex sadas")
-    #c4.write(f"Total opexPV: ${round(st.session_state.opexPV,1)}mn")
-
