@@ -108,7 +108,7 @@ with st.container():
         opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
         npvR=sbc+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
         bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
-        fsBBC = "{:,}".format(roundup(bbc/utiizationFirm))
+        fsBBC = "{:,}".format(bbc)
         
         fsIRR = "{:.1f}".format(st.session_state.irr)
         st.write("Recommendation: ",fsIRR,"%" " Daily Rate ",fsBBC)
