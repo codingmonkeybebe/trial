@@ -12,7 +12,7 @@ ecoLife=25.0
 mm=10**6
 
 defaultIRR=8.0
-utiizationFirm=1#0.997
+
 inflation=2#2%
 
 st.set_page_config(
@@ -35,8 +35,6 @@ def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
 def finxXX():
-   #irr=defaultIRR
-   #st.session_state.irr=defaultIRR
    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
    st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
    #findBBC()
@@ -48,12 +46,6 @@ def findBBC():
     npv=st.session_state.pv #present value
     fv=st.session_state.rv*mm #future value
     adj=(dm*utiizationFirm)
-    st.write(i*12*100)
-    st.write(npv)
-    st.write(fv)
-    st.write(adj)
-    rst=npf.pmt(i,term,-npv,fv)/adj
-    st.write(rst)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
     finxXX()
@@ -77,7 +69,12 @@ with st.container():
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
                             value=5000, step=1,format="$%d/Day",key='opex',on_change = finxXX)
-
+        
+        if opex>0 then
+            utiizationFirm=1#0.997
+        else
+            utiizationFirm=0.997
+        end if
         releaseRate = st.slider('Release Rate $/Day',
                             min_value=5000, max_value=80000,
                             value=35000, step=100,format="$%d/Day",key='releaseRate',on_change = findBBC)
