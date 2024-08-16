@@ -178,8 +178,7 @@ with st.container():
                     formatted_string = "${:.1f}".format(bbc/1000)
                     st.write(formatted_string,"k")
                     sbcR= sbcR+1
-                    
-                irrR=irrR+0.001
+            irrR=irrR+0.001
 
 with st.container():
     #capex=sbc+st.session_state.opexPV
