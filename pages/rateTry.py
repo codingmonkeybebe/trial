@@ -91,39 +91,39 @@ def findIRR():
 
 
 #Global Variables
+irrDefault=8.0
+sbcDefault=100
+otherCapexDefault=7.5
+opexDefault=5000
+inflation=2#2%
+utiizationFirmDefault=0.997
+utiizationRELEASE=0.96
 dm=30.421#days in momth
 mm=10**6
-defaultIRR=8.0
-utiizationRELEASE=0.96
-inflation=2#2%
-
-
-
-
-
-
-
-
-
-
-
 
 
 with st.container():
 
     with col1:     
+        
+        irr = st.slider('Target IRR %',
+            min_value=4.0, max_value=15.0,
+            value=defaultIRR, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+        
+        
+        
         sbc = st.slider('SBC $/vsl',
                             min_value=10.0, max_value=215.0,
                             value=100.0, step=0.5,format="$%fm",key='sbc',on_change = findBBC)
         otherCapex = st.slider('Other Capex: PD+Yard Ext+Legal $/vsl',
                             min_value=0.0, max_value=15.0,
-                            value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
+                            value=otherCapexDefault, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
-                            value=5000, step=100,format="$%d pd",key='opex',on_change = findBBC)
+                            value=opexDefault, step=100,format="$%d pd",key='opex',on_change = findBBC)
         
         if opex>0:
-            utiizationFirm=0.997
+            utiizationFirm=utiizationFirmDefault
         else:
             utiizationFirm=1#0.997
 
@@ -143,9 +143,7 @@ with st.container():
         n = st.slider('Firm Period',
                             min_value=1, max_value=ecoLife,
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
-        irr = st.slider('Target IRR %',
-                            min_value=4.0, max_value=15.0,
-                            value=defaultIRR, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+
 
         defaultBBC=findBBC()
         
