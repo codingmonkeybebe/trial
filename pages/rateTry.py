@@ -86,7 +86,7 @@ with st.container():
                             value=10, step=1,format="%d yr",key='n',on_change = findBBC)
         irr = st.slider('Target IRR %',
                             min_value=5.0, max_value=15.0,
-                            value=8.0, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+                            value=defaultIRR, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
         defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
