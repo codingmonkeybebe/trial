@@ -42,7 +42,7 @@ def finxXX():
    #findBBC()
 
 def findBBC():
-    finxXX()
+    #finxXX()
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv #present value
