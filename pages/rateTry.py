@@ -37,7 +37,6 @@ def roundup(x):
 def findFV(int):         
     #find the End of economic life value of re-lease, opex, rv
     i=int/100/12 #interest rate in decimal and monthly basis
-    st.write(i)
     RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv)/mm #the fv of residual value at end of firm period
 
@@ -61,11 +60,11 @@ def findBBC():
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
     fv=fv*mm #future value
-    st.write(fv)
+    st.write(npv)
     adj=(dm*utiizationFirm)
+    st.write(term) 
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
-    a=roundup(npf.pmt(i,term,-npv,fv)/adj)
-    st.write(a) 
+
     return roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
     fv=findFV(st.session_state.irr)
