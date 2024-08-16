@@ -13,6 +13,7 @@ mm=10**6
 defaultBBC=5000
 defaultIRR=8
 utiizationFirm=0.997
+inflation=2#2%
 #st.session_state.irr=defaultIRR
 #st.session_state.bbc=defaultBBC
 
@@ -50,11 +51,11 @@ def finxXX():
 
 def findBBC():
     #st.session_state.irr=8
-    st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
+    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
     st.session_state.bbc=round(npf.pmt(st.session_state.irr/100/12,st.session_state.n*12,-st.session_state.pv,st.session_state.rv*mm)/dm/utiizationFirm,1)
 def findIRR():
-    st.session_state.opexPV = -npf.pv(st.session_state.irr/100/12,ecoLife*12,opex*dm,0)/mm
+    st.session_state.opexPV = -npf.pv((st.session_state.irr-inflation)/100/12,ecoLife*12,opex*dm,0)/mm
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)*mm
     st.session_state.irr= round(100*npf.rate(st.session_state.n*12, st.session_state.bbc*dm, -st.session_state.pv, st.session_state.rv*mm)*12,5)
 with st.container():
@@ -69,7 +70,7 @@ with st.container():
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
 
         
-        opex = st.slider('Operating Cost',
+        opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
                             value=500, step=1,format="$%d/Day",key='opex',on_change = finxXX)
 
@@ -104,7 +105,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        irrR=(round(st.session_state.irr,1))/100
+        irrR=(round(st.session_state.irr,1)-inflation)/100
         opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
         npvR=sbc+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
         bbc = roundup(npf.pmt(irrR/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
@@ -137,7 +138,7 @@ with st.container():
                 formatted_string = "{:.2f}".format(irrR*100)
                 st.write(formatted_string+"%")
                 
-                opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
+                opexPV = -npf.pv((irrR-inflation)/12,ecoLife*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
                     npvR=sbcR+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
