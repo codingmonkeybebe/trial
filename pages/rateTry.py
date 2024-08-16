@@ -12,7 +12,7 @@ dm=30.421#days in momth
 mm=10**6
 
 defaultIRR=8.0
-
+utiizationRELEASE=0.96
 inflation=2#2%
 
 st.set_page_config(
@@ -37,7 +37,8 @@ def roundup(x):
 def findFV(int):         
     #find the End of economic life value of re-lease, opex, rv
     i=int/100/12 #interest rate in decimal and monthly basis
-    RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,releaseRate*dm,0)/mm #the fv of release rate at end of firm period
+    pmt=releaseRate*dm*utiizationRELEASE
+    RREndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,pmt,0)/mm #the fv of release rate at end of firm period
     RVEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,0,rv*mm)/mm #the fv of residual value at end of firm period
 
     i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
