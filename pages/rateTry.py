@@ -104,7 +104,7 @@ with st.container():
         #formatted_string = "{:,}".format(bbc)
         st.write("Total Cost: ")#+formatted_string+"mn")
 
-        opexPV = -npf.pv(irrR/12,ecoLife*12,opex*dm,0)/mm
+        opexPV = -npf.pv(irr/12,ecoLife*12,opex*dm,0)/mm
         npvR=sbc+otherCapex+opexPV#sum all pv of capex and opex and dd and any other capex
         bbc = roundup(npf.pmt(irr/12,n*12, -(npvR)*mm, rv*mm)/dm/utiizationFirm)
         fsBBC = "{:,}".format(roundup(bbc/utiizationFirm))
