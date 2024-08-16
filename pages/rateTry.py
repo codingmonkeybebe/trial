@@ -73,7 +73,7 @@ with st.container():
                             min_value=0.0, max_value=40.0,
                             value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
 
-        #finxXX()
+        finxXX()
         st.button("Check Number", on_click=finxXX)
         irr = st.slider('Target IRR %',
                             min_value=0.1, max_value=20.0,
