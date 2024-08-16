@@ -31,29 +31,6 @@ col3,col4 = st.columns([20,1])
 #col1, col2= st.columns([5,5])
 c3, c4 = st.columns([5,5])
 
-
-
-def change_label_style(label, font_size, font_color, font_family):
-    #(label,'12px','red','sans-serif'):
-    html = f"""
-    <script>
-        var elems = window.parent.document.querySelectorAll('p');
-        var elem = Array.from(elems).find(x => x.innerText == '{label}');
-        elem.style.fontSize = '{font_size}';
-        elem.style.color = '{font_color}';
-        elem.style.fontFamily = '{font_family}';
-    </script>
-    """
-    st.components.v1.html(html)
-
-#label = "My text here"
-st.write(change_label_style("any test", '20px','red','palatino linotype'))
-
-
-
-
-
-
 def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
@@ -71,42 +48,42 @@ def findFV(int):
     return (RREndOfFirmFV + RVEndOfFirmFV + OPEXEndOfFirmFV)
 
 def findPV(int,sbcPV):
-
-
     i=(int-inflation)/100/12 #interest rate in decimal and monthly basis 
-    pmt=st.session_state.opex*dm
-    term=st.session_state.n*12
+    pmt=opex*dm
+    term=n*12
     fv=0
-    st.session_state.opexPV = -npf.pv(i,term,pmt,fv)/mm  #PV of opex during the firm period
+    opexPV = -npf.pv(i,term,pmt,fv)/mm  #PV of opex during the firm period
 
-    return (sbcPV+st.session_state.opexPV+st.session_state.otherCapex)    
+    return (sbcPV+opexPV+otherCapex)    
     
-def findBBC():
-    fv=findFV(st.session_state.irr)*mm
-    
-    i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
-    term=st.session_state.n*12 #number of months
-    npv=findPV(i*100*12,st.session_state.sbc)*mm #present value   
+def findBBC(int):
+    fv=findFV(int)*mm
+    i=int/100/12 #interest rate in decimal and monthly basis
+    term=n*12 #number of months
+    npv=findPV(i*100*12,sbc)*mm #present value   
     adj=(dm*utiizationFirm)
-    st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
+    #st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
+    return roundup(npf.pmt(i,term,-npv,fv)/adj)
 
+def findSTATEbbc():
+    i=st.session_state.irr
+    fv=findFV(i)*mm
+    term=n*12 #number of months
+    npv=findPV(i,sbc)*mm #present value   
+    adj=(dm*utiizationFirm)
+    i=i/100/12 #interest rate in decimal and monthly basis
+    st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
     return roundup(npf.pmt(i,term,-npv,fv)/adj)
 
 
 def findIRR():
     fv=findFV(st.session_state.irr)
     pmt=st.session_state.bbc*dm #monthly payment
-    term=st.session_state.n*12 #number of months
-    npv=findPV(st.session_state.irr)*mm #present value  
+    term=n*12 #number of months
+    npv=findPV(st.session_state.irr,sbc)*mm #present value  
     fv=fv*mm #future value
     adj=12*100#from monthly to annual rate and in whole number
     st.session_state.irr= round(npf.rate(term, pmt, -npv, fv)*adj,1)
-
-
-
-
-
-
 
 with st.container():
 
@@ -129,24 +106,24 @@ with st.container():
         
         releaseRate = st.slider('Release Rate $ pd',
             min_value=5000, max_value=80000,
-            value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findBBC)
+            value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findSTATEbbc)
         
         rv = st.slider('End of Life Residual Value $mn',
             min_value=0.0, max_value=100.0,
-            value=25.0, step=1.0,format="$%fm",key='rv',on_change = findBBC)
+            value=25.0, step=1.0,format="$%fm",key='rv',on_change = findSTATEbbc)
         
         ecoLife = st.slider('Remaining Economic Life 18/25/30 yrs',
             min_value=18, max_value=30,
-            value=25, step=1,format="%d yr",key='ecoLife',on_change = findBBC)
+            value=25, step=1,format="%d yr",key='ecoLife',on_change = findSTATEbbc)
         
         n = st.slider('Firm Period',
             min_value=1, max_value=ecoLife,
-            value=10, step=1,format="%d yr",key='n',on_change = findBBC)
+            value=10, step=1,format="%d yr",key='n',on_change = findSTATEbbc)
 
 
         irr = st.slider('Target IRR %',
             min_value=4.0, max_value=15.0,
-            value=irrDefault, step=0.1,format="%0.1f",key='irr',on_change = findBBC)
+            value=irrDefault, step=0.1,format="%0.1f",key='irr',on_change = findSTATEbbc)
         
         defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
