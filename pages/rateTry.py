@@ -69,7 +69,7 @@ with st.container():
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
-                            value=5000, step=1,format="$%d/Day",key='opex',on_change = finxXX)
+                            value=5000, step=1,format="$%d pd",key='opex',on_change = finxXX)
         
         if opex>0:
             utiizationFirm=0.997
@@ -77,9 +77,9 @@ with st.container():
             utiizationFirm=1#0.997
 
         
-        releaseRate = st.slider('Release Rate $/Day',
+        releaseRate = st.slider('Release Rate $ pd',
                             min_value=5000, max_value=80000,
-                            value=35000, step=100,format="$%d/Day",key='releaseRate',on_change = findBBC)
+                            value=35000, step=100,format="$%d pd",key='releaseRate',on_change = findBBC)
         
         rv = st.slider('End of Life Residual Value $mn',
                             min_value=0.0, max_value=40.0,
@@ -94,7 +94,7 @@ with st.container():
         defaultBBC=findBBC()
         bbc = st.slider('Daily Rate',
                             min_value=0, max_value=200000,
-                            value=defaultBBC, step=100,format="$%d/Day",key='bbc',on_change = findIRR)
+                            value=defaultBBC, step=100,format="$%d pd",key='bbc',on_change = findIRR)
         
     with col2:
         #formatted_string = "{:,}".format(bbc)
