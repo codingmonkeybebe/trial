@@ -157,7 +157,7 @@ with st.container():
                 opexPV = -npf.pv((irrR-inflation/100)/12,n*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    finxXX(irrR/100)
+                    finxXX(irrR*100)
                     pv=(sbcR+otherCapex+opexPV)*mm #sum all pv of capex and opex and dd and any other capex
                     fv=st.session_state.fvEndOfFirm*mm
                     #st.write(fv/mm)
