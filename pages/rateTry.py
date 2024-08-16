@@ -34,7 +34,7 @@ c3, c4 = st.columns([5,5])
 def roundup(x):
     return int(math.ceil(x / 100)) * 100#to the nearest 10th
 
-def finxXX(int):         
+def findFV(int):         
     #find the End of economic life value of re-lease, opex, rv
     i=int/100/12 #interest rate in decimal and monthly basis
     
@@ -47,28 +47,28 @@ def finxXX(int):
     st.write(inflation)
     opexEndOfFirmFV=-npf.pv(i,(ecoLife-n)*12,opex*escale*dm,0)/mm #the fv of release rate at end of firm period
     
-    st.session_state.fvEndOfFirm =RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV
+    return (RREndOfFirmFV + RVEndOfFirmFV + opexEndOfFirmFV)
 
     i=(st.session_state.irr-inflation)/100/12 #interest rate in decimal and monthly basis 
-    #st.write(i)
     st.session_state.opexPV = -npf.pv(i,n*12,opex*dm,0)/mm  #PV of opex during the firm period
     st.session_state.pv=(st.session_state.sbc+st.session_state.opexPV+st.session_state.otherCapex)
     #findBBC()
 
 def findBBC():
-    finxXX(st.session_state.irr)
+    fv=findFV(st.session_state.irr)
     i=st.session_state.irr/100/12 #interest rate in decimal and monthly basis
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
-    fv=st.session_state.rv*mm #future value
+    fv=fv*mm #future value
     adj=(dm*utiizationFirm)
     st.session_state.bbc=roundup(npf.pmt(i,term,-npv,fv)/adj)
+    return roundup(npf.pmt(i,term,-npv,fv)/adj)
 def findIRR():
-    finxXX(st.session_state.irr)
+    fv=findFV(st.session_state.irr)
     pmt=st.session_state.bbc*dm #monthly payment
     term=st.session_state.n*12 #number of months
     npv=st.session_state.pv*mm #present value
-    fv=st.session_state.rv*mm #future value
+    fv=fv*mm #future value
     adj=12*100#from monthly to annual rate and in whole number
     st.session_state.irr= round(npf.rate(term, pmt, -npv, fv)*adj,1)
 
@@ -84,7 +84,7 @@ with st.container():
                             value=7.5, step=0.5,format="$%fm",key='otherCapex',on_change = findBBC)
         opex = st.slider('Operating Cost + DD with 2% inflation',
                             min_value=0, max_value=20000,
-                            value=5000, step=1,format="$%d pd",key='opex',on_change = finxXX)
+                            value=5000, step=1,format="$%d pd",key='opex',on_change = findBBC)
         
         if opex>0:
             utiizationFirm=0.997
@@ -98,7 +98,7 @@ with st.container():
         
         rv = st.slider('End of Life Residual Value $mn',
                             min_value=0.0, max_value=40.0,
-                            value=10.0, step=0.5,format="$%fm",key='rv',on_change = finxXX)
+                            value=10.0, step=0.5,format="$%fm",key='rv',on_change = findBBC)
         
         ecoLife = st.slider('Economic Life 18/25/30 yrs',
                             min_value=18, max_value=30,
@@ -157,11 +157,9 @@ with st.container():
                 opexPV = -npf.pv((irrR-inflation/100)/12,n*12,opex*dm,0)/mm
                 sbcR= sbcR0-deltaCpx
                 for j in range(1,deltaCpx*2+2,1):
-                    finxXX(irrR*100)
+
                     pv=(sbcR+otherCapex+opexPV)*mm #sum all pv of capex and opex and dd and any other capex
-                    fv=st.session_state.fvEndOfFirm*mm
-                    #st.write(fv/mm)
-                    #st.write(pv/mm)
+                    fv=findFV(irrR*100)
                     bbc = roundup(npf.pmt(irrR/12,n*12, -pv, fv)/dm/utiizationFirm)
                     formatted_string = "${:.1f}".format(bbc/1000)
                     st.write(formatted_string,"k")
