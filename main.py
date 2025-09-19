@@ -17,7 +17,6 @@ default_size_teu = 10000
 # --- Cached Functions ---
 @st.cache_data
 def calc_milestone_payments(initial_investment, milestone_dates, milestone_percents):
-    # Ensure milestone dates are end of month
     milestone_dates_end = [
         pd.Timestamp(d) + pd.offsets.MonthEnd(0)
         if pd.Timestamp(d).day != (pd.Timestamp(d) + pd.offsets.MonthEnd(0)).day
@@ -28,7 +27,18 @@ def calc_milestone_payments(initial_investment, milestone_dates, milestone_perce
     return payments
 
 @st.cache_data
-def calc_cashflows_and_irr(project_life_years, milestone_payments, delivery_date, tc_rate, opex_start, dd_cost_start, annual_escalation, scrap_value):
+def calc_cashflows_and_irr(
+    project_life_years,
+    firm_period_years,
+    milestone_payments,
+    delivery_date,
+    tc_rate,
+    release_rate,
+    opex_start,
+    dd_cost_start,
+    annual_escalation,
+    scrap_value,
+):
     delivery_date = pd.Timestamp(delivery_date)
     milestone_payments = [(pd.Timestamp(d), amt) for d, amt in milestone_payments]
     start_date = min([mp[0] for mp in milestone_payments] + [delivery_date])
@@ -44,8 +54,12 @@ def calc_cashflows_and_irr(project_life_years, milestone_payments, delivery_date
     for i, dt in enumerate(cashflows.index):
         if dt >= delivery_date:
             years_from_delivery = (dt.year - delivery_date.year) + (dt.month - delivery_date.month) / 12
+            if years_from_delivery <= firm_period_years:
+                current_tc_rate = tc_rate
+            else:
+                current_tc_rate = release_rate
             opex = opex_start * ((1 + annual_escalation) ** years_from_delivery)
-            net_revenue = tc_rate - opex
+            net_revenue = current_tc_rate - opex
             cashflows.loc[dt] += net_revenue * monthly_days
     for y in range(5, project_life_years + 1, 5):
         dd_date = delivery_date + relativedelta(years=y)
@@ -93,76 +107,18 @@ def calc_sensitivity_table(vessel_price_million, current_irr_annual, project_lif
     df = pd.DataFrame(
         matrix,
         columns=[f"{irr*100:.1f}%" for irr in irr_targets],
-        index=[f"{vp:.1f}M" for vp in vessel_prices]
+        index=[f"{vp:.1f}M" for vp in vessel_prices],
     )
     return df
 
 # --- Page Title ---
 st.title("Monthly Vessel Leasing IRR Calculator with Costs Escalation and Extra Inputs")
 
-# --- IRR Results Placeholder (will be updated dynamically later) ---
-# Initialize default parameters for initial IRR and sensitivity calculation to show before inputs
-default_vessel_price_million = 100.0
-default_project_life_years = 25
-default_opex_per_day_start = 6000
-default_dd_cost_start = 1_000_000
-default_annual_escalation_pct = 0.02
-default_tc_rate_input = 40000
-default_scrap_value_million = 25.0  # Changed default scrap value to 25 million USD
-
-
-default_delivery_date = pd.to_datetime("2026-12-31")
-
-# Dummy milestone dates priced one year apart before delivery and milestone percents
-default_milestone_dates = [
-    default_delivery_date - relativedelta(months=12),
-    default_delivery_date - relativedelta(months=9),
-    default_delivery_date - relativedelta(months=6),
-    default_delivery_date - relativedelta(months=3),
-    default_delivery_date,
-]
-default_milestone_percents = [20, 10, 10, 10, 50]
-
-dummy_initial_investment = default_vessel_price_million * 1_000_000 + 1_000_000 + 1_000_000 + 700_000 + 70_000  # Default costs included
-
-milestone_payments_dummy = calc_milestone_payments(
-    dummy_initial_investment, default_milestone_dates, default_milestone_percents
-)
-cashflows_dummy, irr_annual_dummy = calc_cashflows_and_irr(
-    default_project_life_years,
-    milestone_payments_dummy,
-    default_delivery_date,
-    default_tc_rate_input,
-    default_opex_per_day_start,
-    default_dd_cost_start,
-    default_annual_escalation_pct,
-    default_scrap_value_million * 1_000_000,
-)
-
-sensitivity_df_dummy = calc_sensitivity_table(
-    default_vessel_price_million,
-    irr_annual_dummy if irr_annual_dummy is not None else 0.12,
-    default_project_life_years,
-    default_opex_per_day_start,
-    default_dd_cost_start,
-    default_annual_escalation_pct,
-)
-
-# Show IRR and sensitivity table before inputs per previous requests
-st.write("### IRR Results (Based on Default Inputs)")
-if irr_annual_dummy is not None:
-    st.write(f"Annualized IRR: {irr_annual_dummy * 100:.3f}%")
-else:
-    st.write("IRR could not be computed with default inputs.")
-
-st.write("### Sensitivity Table: Required TC Rate (USD/day) (Based on Default Inputs)")
-st.dataframe(sensitivity_df_dummy)
-
 # --- Inputs Section ---
 
-# Carrier, Vessel Size and Contract Type inputs in one row
-st.write("### Carrier, Vessel Size and Contract Type")
-cols_top = st.columns(3)
+# Carrier, Vessel Size, Contract Type, and PO input in one row
+st.write("### Carrier, Vessel Size, Contract Type and PO")
+cols_top = st.columns(4)
 
 with cols_top[0]:
     carrier = st.selectbox("Select Carrier", top_liners, index=0)
@@ -173,8 +129,11 @@ with cols_top[1]:
 with cols_top[2]:
     contract_type = st.selectbox("Contract Type", ["TC", "BBC"])
 
+with cols_top[3]:
+    po_option = st.selectbox("PO (Purchase Option)", ["No", "Yes"])
+
 # Vessel price input
-vessel_price_million = st.number_input("Vessel Price (Million USD)", value=default_vessel_price_million, min_value=0.1, step=0.1)
+vessel_price_million = st.number_input("Vessel Price (Million USD)", value=100.0, min_value=0.1, step=0.1)
 
 # Conditional inputs for costs based on contract type
 if contract_type == "BBC":
@@ -193,22 +152,28 @@ else:
         predelivery_cost_million = st.number_input("Pre-delivery Cost (Million USD)", value=1.0, min_value=0.0, step=0.01)
     with cols_costs[1]:
         shipyard_extra_million = st.number_input("Shipyard Extra Cost (Million USD)", value=1.0, min_value=0.0, step=0.01)
-    with cols_costs[2]:
+    
+    # Supervision and legal fee in same row
+    cols_supervision_legal = st.columns(2)
+    with cols_supervision_legal[0]:
         supervision_million = st.number_input("Supervision Cost (Million USD)", value=0.7, min_value=0.0, step=0.01)
+    with cols_supervision_legal[1]:
+        legal_fee_million = st.number_input("Legal Fee (Million USD)", value=0.07, min_value=0.0, step=0.001)
 
-    opex_per_day_start = st.number_input("OPEX (USD/day) at Year 0", value=default_opex_per_day_start)
+    opex_per_day_start = st.number_input("OPEX (USD/day) at Year 0", value=6000)
     dd_cost_million_start = st.number_input("Dry Docking Cost every 5 years (Million USD) at Year 0", value=1.0, min_value=0.0, step=0.1)
     dd_cost_start = dd_cost_million_start * 1_000_000
     annual_escalation_pct = st.number_input("Annual Escalation Rate (%) for OPEX and DD Costs", value=2.0, min_value=0.0, step=0.1) / 100
 
-# Legal fee input is always available
-legal_fee_million = st.number_input("Legal Fee (Million USD)", value=0.07, min_value=0.0, step=0.001)
+if contract_type == "BBC":
+    # Even if BBC, legal fee input always visible and separate
+    legal_fee_million = st.number_input("Legal Fee (Million USD)", value=0.07, min_value=0.0, step=0.001)
 
 # Convert to USD
 vessel_price = vessel_price_million * 1_000_000
-predelivery_cost = predelivery_cost_million * 1_000_000
-shipyard_extra = shipyard_extra_million * 1_000_000
-supervision = supervision_million * 1_000_000
+predelivery_cost = predelivery_cost_million * 1_000_000 if contract_type != "BBC" else 0.0
+shipyard_extra = shipyard_extra_million * 1_000_000 if contract_type != "BBC" else 0.0
+supervision = supervision_million * 1_000_000 if contract_type != "BBC" else 0.0
 legal_fee = legal_fee_million * 1_000_000
 
 initial_investment = vessel_price + predelivery_cost + shipyard_extra + supervision + legal_fee
@@ -245,21 +210,32 @@ total_perc = sum(milestone_percents)
 if abs(total_perc - 100) > 0.01:
     st.error(f"Milestone percentages must sum to 100%. Current sum: {total_perc:.2f}%")
 
-project_life_years = st.number_input("Project Life (years)", value=default_project_life_years, min_value=1, max_value=30)
+# Firm Period and Release Rate inputs
+firm_period_years = st.number_input("Firm Period (years)", value=15, min_value=1, max_value=30)
+release_rate = st.number_input("Release Rate (USD/day)", value=20000)
+
+# Adjust project life and release rate if PO is Yes
+if po_option == "Yes":
+    project_life_years = firm_period_years
+    release_rate = 0.0
+else:
+    project_life_years = st.number_input("Project Life (years)", value=25, min_value=firm_period_years, max_value=30)
 
 scrap_value_million = st.number_input("Terminal Scrap Value (Million USD)", value=25.0, min_value=0.0, step=0.1)
 scrap_value = scrap_value_million * 1_000_000
 
 # TC Rate Input
-tc_rate_input = st.number_input("TC Rate (USD/day)", value=default_tc_rate_input)
+tc_rate_input = st.number_input("TC Rate (USD/day)", value=40000)
 
 # Recompute with current inputs
 milestone_payments = calc_milestone_payments(initial_investment, milestone_dates, milestone_percents)
 cashflows, irr_annual = calc_cashflows_and_irr(
     project_life_years,
+    firm_period_years,
     milestone_payments,
     delivery_date,
     tc_rate_input,
+    release_rate,
     opex_per_day_start,
     dd_cost_start,
     annual_escalation_pct,
