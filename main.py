@@ -72,21 +72,32 @@ def calc_cashflows_and_irr(
     irr_annual = (1 + irr_monthly) ** 12 - 1 if irr_monthly is not None else None
     return cashflows, irr_annual
 
-@st.cache_data
-def calc_sensitivity_table(vessel_price_million, current_irr_annual, project_life_years, opex_start, dd_cost_start, annual_escalation):
+@st.cache_data(show_spinner=False)
+def calc_sensitivity_table(
+    vessel_price_million,
+    current_irr_annual,
+    project_life_years,
+    opex_start,
+    dd_cost_start,
+    annual_escalation
+):
     vessel_prices = [vessel_price_million - i for i in reversed(range(5))]
     irr_targets = [current_irr_annual - 0.02 + i * 0.01 for i in range(5)]
-
+    
     def compute_required_tc(vp_m, target_irr):
         low_tc, high_tc = 1000, 100000
-        tolerance = 10
+        tolerance = 50  # less precision for faster convergence
+        max_iterations = 15  # limit iterations
+        
         vp = vp_m * 1_000_000
         months = project_life_years * 12
-        while high_tc - low_tc > tolerance:
+        avg_opex = opex_start * ((1 + annual_escalation) ** (project_life_years / 2))
+        
+        for _ in range(max_iterations):
             mid_tc = (low_tc + high_tc) / 2
-            avg_opex = opex_start * ((1 + annual_escalation) ** (project_life_years / 2))
             monthly_cf = (mid_tc - avg_opex) * 30.4375
-            cfs = np.full(months, monthly_cf)
+            cfs = np.empty(months)
+            cfs.fill(monthly_cf)
             cfs[0] -= vp
             irr_m = npf.irr(cfs)
             if irr_m is None:
@@ -96,18 +107,19 @@ def calc_sensitivity_table(vessel_price_million, current_irr_annual, project_lif
                 low_tc = mid_tc
             else:
                 high_tc = mid_tc
+            if high_tc - low_tc <= tolerance:
+                break
         return round((low_tc + high_tc) / 2, 0)
-
+    
     matrix = []
     for vp_m in vessel_prices:
-        row = []
-        for irr_t in irr_targets:
-            row.append(compute_required_tc(vp_m, irr_t))
+        row = [compute_required_tc(vp_m, irr_t) for irr_t in irr_targets]
         matrix.append(row)
+    
     df = pd.DataFrame(
         matrix,
         columns=[f"{irr*100:.1f}%" for irr in irr_targets],
-        index=[f"{vp:.1f}M" for vp in vessel_prices],
+        index=[f"{vp:.1f}M" for vp in vessel_prices]
     )
     return df
 
